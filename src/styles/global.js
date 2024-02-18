@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { DEVICE_BREAKPOINTS } from "./deviceBreakpoints";
 
 export default createGlobalStyle`
   * {
@@ -7,6 +8,15 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     -webkit-font-smoothing: antialiased;
+  }
+
+  :root {
+    font-size: 16px;
+
+    @media(min-width: ${DEVICE_BREAKPOINTS.XS} ){
+      font-size: 14px;
+    }
+
   }
 
   body {
