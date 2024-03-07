@@ -20,11 +20,15 @@ export function SignIn() {
 
         <div className="title">Faça login</div>
 
-        <label>Email</label>
-        <Input className="input-SignIn" placeholder="Exemplo: exemplo@exemplo.com.br"/>
+        <div className="wrapper-input">
+          <label>Email</label>
+          <Input className="input-SignIn" placeholder="Exemplo: exemplo@exemplo.com.br"/>
+        </div>
 
-        <label>Senha</label>
-        <Input className="input-SignIn" placeholder="No mínimo 6 caracteres"/>
+        <div className="wrapper-input">
+          <label>Senha</label>
+          <Input className="input-SignIn" placeholder="No mínimo 6 caracteres"/>
+        </div>
 
         <Button title="Entrar" />
         <button className="button-auth">Criar nova conta</button>

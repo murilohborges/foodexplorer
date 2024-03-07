@@ -32,6 +32,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 2rem;
   width: 100%;
 
   .title{
@@ -43,17 +44,23 @@ export const Form = styled.form`
     margin: 0 auto 2rem;
   }
 
+  .wrapper-input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+  }
+
   label {
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
     font-size: 1rem;
-    margin-bottom: 8px;
   }
 
   .button-auth {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
     width: 100%;
 
     font-size: 1rem;

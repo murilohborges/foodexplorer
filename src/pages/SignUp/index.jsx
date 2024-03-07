@@ -20,14 +20,20 @@ export function SignUp() {
 
         <div className="title">Crie sua conta</div>
 
-        <label>Seu nome</label>
-        <Input placeholder="Exemplo: Maria da Silva"/>
+        <div className="wrapper-input">
+          <label>Seu nome</label>
+          <Input placeholder="Exemplo: Maria da Silva"/>
+        </div>
 
-        <label>Email</label>
-        <Input placeholder="Exemplo: exemplo@exemplo.com.br"/>
+        <div className="wrapper-input">
+          <label>Email</label>
+          <Input placeholder="Exemplo: exemplo@exemplo.com.br"/>
+        </div>
 
-        <label>Senha</label>
-        <Input placeholder="No mínimo 6 caracteres"/>
+        <div className="wrapper-input">
+          <label>Senha</label>
+          <Input placeholder="No mínimo 6 caracteres"/>
+        </div>
 
         <Button title="Criar conta" />
         <button className="button-auth">Já tenho uma conta</button>

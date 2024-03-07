@@ -8,11 +8,11 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     -webkit-font-smoothing: antialiased;
+    max-width: 100vw;
   }
 
   :root {
     font-size: 16px;
-
     @media(min-width: ${DEVICE_BREAKPOINTS.XS} ){
       font-size: 14px;
     }

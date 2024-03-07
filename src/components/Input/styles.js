@@ -7,13 +7,10 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
-
-  margin-bottom: 2rem;
   border-radius: 10px;
 
-
   > input {
-    height: 56px;
+    height: 3.5rem;
     width: 100%;
 
     padding: 1rem 0.875rem;
