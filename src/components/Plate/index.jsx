@@ -1,5 +1,5 @@
 import { Container, PlateImage } from './styles';
-import plateAvatar from '../../assets/image2.png'
+import plateAvatar from '../../assets/image3.png'
 
 export function Plate({ data, ...rest }){
   const PlateTitle = `${data.title} >`;
@@ -14,10 +14,12 @@ export function Plate({ data, ...rest }){
 
 
       <PlateImage>
-        <img src={plateAvatar} alt="Foto do prato" />
+        <img src={plateAvatar} alt="Foto do prato"/>
       </PlateImage>
 
       <h1>{PlateTitle}</h1>
+
+      <p>Massa fresca com camarões e pesto.</p>
 
       <div className="price">{PlatePrice}</div>
 

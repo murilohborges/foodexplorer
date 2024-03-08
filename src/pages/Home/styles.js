@@ -12,42 +12,67 @@ export const Title = styled.div`
     
   margin-top: 3.2rem;
   margin-bottom: 3.875rem;
-  margin-left: 2.2rem;
-  margin-right: 2.2rem;
+  margin-left: 2.25rem;
+  margin-right: 1rem;
 
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
   font-family: "Poppins", sans-serif;
-  padding: 2.5rem 0 1.375rem 0;
+  padding: 2.5rem 0;
 
   display: flex;
   flex-direction: row;
   position: relative;
+  
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+    margin-top: 10.75rem;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    display: grid;
+    grid-template-columns: 20rem auto;
+    grid-template-areas: 
+    "img content";
+  }
 
   .description {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 12.3rem;
+    margin-left: 12.8rem;
     @media (max-width: 375px ){
       margin-left: 11.3rem;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+      align-items: center;
+      margin-left: 0;
+      grid-area: content;
     }
   }
 
   h1 {
     font-weight: 600;
     font-size: 1.125rem;
+    white-space: nowrap;
     @media (max-width: 375px ){
       font-size: 1rem;
     }
     @media (max-width: 320px ){
       font-size: .9rem;
     }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
   }
   p {
     font-weight: normal;
     font-size: 0.75rem;
+    font-family: 'Roboto', sans-serif;
     @media (max-width: 375px ){
       font-size: 0.6rem;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+      font-size: 1rem;
+      font-weight: 400;
     }
   }
 `;
@@ -57,7 +82,7 @@ export const TitleImage = styled.div`
   background: url(${introImage}) no-repeat center center;
   background-size: cover;
 
-  width: 14rem;
+  width: 14.5rem;
   height: 10rem;
 
   position: absolute;
@@ -68,11 +93,16 @@ export const TitleImage = styled.div`
     height: 10rem;
     left: -0.7rem;
   }
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}){
+    width: 24rem;
+    height: 15rem;
+    left: -4rem;
+  }
 `;
 
 export const Main = styled.div`
-  margin-bottom: 1.56rem;
-  margin-left: 2.2rem;
+  margin-left: 6rem;
+  margin-right: 6rem;
 `;
 
 export const WrapperPlates = styled.div`

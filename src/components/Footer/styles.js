@@ -16,6 +16,12 @@ export const Container = styled.div`
   @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
     gap: 0.5rem;
   }
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    gap: 25rem;
+  }
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    gap: 40rem;
+  }
 
   > .title-footer {
     display: flex;
@@ -32,6 +38,10 @@ export const Container = styled.div`
       font-size: 0.8rem;
       max-height: 100vh;
     }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 1rem;
+      max-height: 100vh;
+    }
   }
 
   > p {
@@ -40,6 +50,10 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
     @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
       font-size: 0.6rem;
+      max-height: 100vh;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 0.875rem;
       max-height: 100vh;
     }
   }

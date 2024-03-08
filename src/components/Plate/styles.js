@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 
 export const Container = styled.div`
@@ -19,6 +20,14 @@ export const Container = styled.div`
 
   position: relative;
 
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+    height: 28.875rem;
+    width: 19rem;
+    padding-top: 4.16rem;
+    padding-bottom: 4.16rem;
+    gap: 0.94rem;
+  }
+
   > svg {
     position: absolute;
     top: 1rem;
@@ -31,6 +40,21 @@ export const Container = styled.div`
     font-weight: 500;
     font-size: 0.875rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  > p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    display: none;
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      display: block;
+    }
   }
 
   > .price {
@@ -38,6 +62,10 @@ export const Container = styled.div`
     font-weight: 400;
     font-size: 1rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      font-size: 2rem;
+      font-weight: 400;
+    }
   }
 `;
 
@@ -49,6 +77,11 @@ export const PlateImage = styled.div`
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      display: block;
+      width: 11rem;
+      height: 11rem;
+    }
   }
 `;
 

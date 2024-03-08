@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
     height: 6rem;
-    padding: 1.5rem 2.2rem 1.5rem 2.4rem;
+    padding: 1.5rem 2.2rem 1.5rem 2.5rem;
     justify-content: space-around;
   }
 
