@@ -111,4 +111,7 @@ export const WrapperPlates = styled.div`
   gap: 1rem;
 
   margin-bottom: 1.5rem;
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}){
+    margin-bottom: 2rem;
+  }
 `;
