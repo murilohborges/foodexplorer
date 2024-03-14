@@ -2,6 +2,8 @@ import { Container, Form, HeaderLogo } from "./styles.js";
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
+import { Link } from "react-router-dom";
+
 
 export function SignIn() {
 
@@ -31,7 +33,7 @@ export function SignIn() {
         </div>
 
         <Button title="Entrar" />
-        <button className="button-auth">Criar nova conta</button>
+        <Link className="button-auth" to="/register">Criar nova conta</Link>
 
       </Form>
         

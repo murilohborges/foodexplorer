@@ -1,4 +1,5 @@
 import { Container, Logo, InputSearch, ButtonNewPlate, ButtonLogout } from "./styles.js";
+import { Link } from "react-router-dom";
 
 export function Header() {
 
@@ -30,7 +31,7 @@ export function Header() {
           <input type="text" placeholder="Busque por pratos ou ingredientes" />
         </InputSearch>
 
-        <ButtonNewPlate>Novo prato</ButtonNewPlate>
+        <ButtonNewPlate to="/new">Novo prato</ButtonNewPlate>
         
         <ButtonLogout>
           <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">

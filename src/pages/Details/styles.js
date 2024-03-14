@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ export const Main = styled.div`
   margin-bottom: 3.125rem;
 `;
 
-export const BackButton = styled.div`
+export const BackButton = styled(Link)`
   display: flex;
   align-items: center;
   gap: 6px;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
+import { Link } from "react-router-dom";
 
 
 export const Container = styled.div`
@@ -17,7 +18,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-
   position: relative;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
@@ -32,18 +32,7 @@ export const Container = styled.div`
     position: absolute;
     top: 1rem;
     right: 1rem;
-  }
-
-
-  > h1 {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.COLORS.LIGHT_300};
-    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+    cursor: pointer;
   }
 
   > p {
@@ -82,6 +71,29 @@ export const PlateImage = styled.div`
       width: 11rem;
       height: 11rem;
     }
+  }
+`;
+
+export const EditIcon = styled(Link)`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+
+  
+`;
+
+export const DetailsButton = styled(Link)`
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.COLORS.LIGHT_300};
+  background: transparent;
+  border: none;
+
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+    font-size: 1.5rem;
+    font-weight: bold;
   }
 `;
 

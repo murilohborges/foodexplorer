@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.COLORS.DARK_700};
@@ -127,7 +128,7 @@ export const InputSearch = styled.div`
   }
 `;
 
-export const ButtonNewPlate = styled.button`
+export const ButtonNewPlate = styled(Link)`
   width: 13.5rem;
   background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
