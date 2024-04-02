@@ -3,9 +3,11 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
 import { Link } from "react-router-dom";
+import { useAuth } from '../../hooks/auth';
 
 
 export function SignIn() {
+  const data = useAuth();
 
 
   return(
@@ -29,7 +31,7 @@ export function SignIn() {
 
         <div className="wrapper-input">
           <label>Senha</label>
-          <Input className="input-SignIn" placeholder="No mínimo 6 caracteres"/>
+          <Input className="input-SignIn" type="password" placeholder="No mínimo 6 caracteres"/>
         </div>
 
         <Button title="Entrar" />
