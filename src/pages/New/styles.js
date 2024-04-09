@@ -93,7 +93,7 @@ export const Form = styled.div`
       -webkit-appearance: none;
     }
 
-    .tags {
+    .ingredients {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
@@ -181,7 +181,7 @@ export const Row = styled.div`
       -webkit-appearance: none;
     }
 
-    .tags {
+    .ingredients {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;

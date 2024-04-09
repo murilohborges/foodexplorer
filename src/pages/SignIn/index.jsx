@@ -4,11 +4,18 @@ import { Button } from '../../components/Button';
 
 import { Link } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
+import  { useState } from 'react';
 
 
 export function SignIn() {
-  const data = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const { signIn } = useAuth();
+  
+  function handleSignIn(){
+    signIn({ email, password });
+  }
 
   return(
     <Container>
@@ -26,15 +33,25 @@ export function SignIn() {
 
         <div className="wrapper-input">
           <label>Email</label>
-          <Input className="input-SignIn" placeholder="Exemplo: exemplo@exemplo.com.br"/>
+          <Input 
+            className="input-SignIn" 
+            placeholder="Exemplo: exemplo@exemplo.com.br"
+            onChange={e => setEmail(e.target.value)}
+          />
         </div>
 
         <div className="wrapper-input">
           <label>Senha</label>
-          <Input className="input-SignIn" type="password" placeholder="No mínimo 6 caracteres"/>
+          <Input 
+            className="input-SignIn" 
+            type="password" 
+            placeholder="No mínimo 6 caracteres"
+            onChange={e => setPassword(e.target.value)}
+          />
         </div>
 
-        <Button title="Entrar" />
+        <Button title="Entrar" onClick={handleSignIn}/>
+
         <Link className="button-auth" to="/register">Criar nova conta</Link>
 
       </Form>

@@ -1,4 +1,5 @@
 import { Container, BackButton, Main, Form, Avatar, SaveButton, Row } from "./styles.js";
+import { useState } from "react";
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Textarea } from "../../components/Textarea/index.jsx";
@@ -6,7 +7,17 @@ import { NoteItem } from "../../components/NoteItem/index.jsx";
 import { Link } from "react-router-dom";
 
 export function New() {
+  const [ingredients, setIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState("");
 
+  function handleAddIngredient(){
+    setIngredients(prevState => [...prevState, newIngredient]);
+    setNewIngredient("");
+  }
+
+  function handleRemoveIngredient(deleted){
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+  }
 
   return(
     <Container>
@@ -68,18 +79,25 @@ export function New() {
 
           <Row className="row-two">
             <div className="wrapper-input">
-              <label htmlFor="tags">
-                Tags
+              <label htmlFor="ingredients">
+                Ingredientes
               </label>
-              <div className="tags">
-                <NoteItem 
-                  isNew={false}
-                  value="Pão Naan"
-                />
-                
+              <div className="ingredients">
+                {
+                  ingredients.map((ingredient, index) => (
+                    <NoteItem
+                      key={String(index)}
+                      value={ingredient}
+                      onClick={() => handleRemoveIngredient(ingredient)}
+                    />
+                  ))
+                }
                 <NoteItem 
                   isNew
-                  placeholder="Novo link"
+                  placeholder="Adicionar"
+                  onChange={e => setNewIngredient(e.target.value)}
+                  value={newIngredient}
+                  onClick={handleAddIngredient}
                 />
                 
               </div>  

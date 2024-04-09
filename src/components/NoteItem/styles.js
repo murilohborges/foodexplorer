@@ -5,7 +5,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 8px;
   height: 2rem;
-  
+  width: fit-content;
 
   background-color: ${({ theme, $isNew}) => $isNew ? "transparent" : theme.COLORS.LIGHT_600};
   color: ${({ theme}) => theme.COLORS.LIGHT_100};
@@ -32,7 +32,7 @@ export const Container = styled.div`
 
   #input-tag {
     height: fit-content;
-    width: 4.4rem;
+    width: fit-content;
     padding: 0;
 
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
