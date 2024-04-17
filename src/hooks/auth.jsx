@@ -35,6 +35,7 @@ function AuthProvider({ children }) {
     setData({})
   }
 
+
   useEffect(() => {
     const token = localStorage.getItem("@foodexplorer:token");
     const user = localStorage.getItem("@foodexplorer:user");

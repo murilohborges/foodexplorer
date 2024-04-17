@@ -1,5 +1,5 @@
 import { Container, PlateImage, EditIcon, DetailsButton } from './styles';
-import plateAvatar from '../../assets/image3.png';
+import plateIcon from '../../assets/plateIcon.png'
 import { Link } from "react-router-dom";
 
 export function Plate({ data, ...rest }){
@@ -16,7 +16,7 @@ export function Plate({ data, ...rest }){
       </EditIcon>
 
       <PlateImage>
-        <img src={plateAvatar} alt="Foto do prato"/>
+        <img src={plateIcon} alt="Foto do prato"/>
       </PlateImage>
 
       <DetailsButton to="/details/1" >{PlateTitle}</DetailsButton>

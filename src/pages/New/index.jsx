@@ -1,14 +1,34 @@
 import { Container, BackButton, Main, Form, Avatar, SaveButton, Row } from "./styles.js";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Textarea } from "../../components/Textarea/index.jsx";
 import { NoteItem } from "../../components/NoteItem/index.jsx";
 import { Link } from "react-router-dom";
+import plateIcon from '../../assets/plateIcon.png';
+
+import { useAuth } from '../../hooks/auth';
+import { api } from '../../services/api.js'
+
 
 export function New() {
+  const { user } = useAuth();
+
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Refeição");
+  const [price, setPrice] = useState("00,00");
+  const [description, setDescription] = useState("");
+
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : plateIcon;
+
+  const [avatar, setAvatar] = useState(avatarUrl);
+  const [avatarFile, setAvatarFile] = useState(null);
+
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
+
+  const navigate = useNavigate();
 
   function handleAddIngredient(){
     setIngredients(prevState => [...prevState, newIngredient]);
@@ -17,6 +37,21 @@ export function New() {
 
   function handleRemoveIngredient(deleted){
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+  }
+
+  async function handleNewNote(){
+    const response = await api.post("/plates", {
+      title,
+      category,
+      ingredients,
+      price,
+      description
+    });    
+
+    console.log(response.data)
+
+    alert("Nota criada com sucesso");
+    navigate("/");
   }
 
   return(
@@ -61,7 +96,12 @@ export function New() {
               <label htmlFor="name">
                 Nome
               </label>
-              <input type="text" id="name" placeholder="Ex.: Salada Cesar"/>
+              <input 
+                type="text" 
+                id="name" 
+                placeholder="Ex.: Salada Cesar" 
+                onChange={e => setTitle(e.target.value)}
+              />
             </div>
 
             <div className="wrapper-input">
@@ -69,7 +109,7 @@ export function New() {
                 Categoria
               </label>
 
-              <select id="type">
+              <select id="type" onChange={e => setCategory(e.target.value)}>
                 <option value="Refeição">Refeição</option>
                 <option value="Prato principal">Prato principal</option>
                 <option value="Sobremesa">Sobremesa</option>
@@ -107,7 +147,12 @@ export function New() {
               <label htmlFor="price">
                 Preço
               </label>
-              <input type="number" id="price" placeholder="R$ 00,00" />
+              <input 
+                type="number" 
+                id="price" 
+                placeholder="R$ 00,00"
+                onChange={e => setPrice(e.target.value)}
+              />
             </div>
           </Row>
 
@@ -116,12 +161,16 @@ export function New() {
               <label htmlFor="description">
                 Descrição
               </label>
-              <Textarea id="description" placeholder="Fale brevemente sobre o prato, seus ingredientes e composição."/>
+              <Textarea 
+                id="description" 
+                placeholder="Fale brevemente sobre o prato, seus ingredientes e composição."
+                onChange={e => setDescription(e.target.value)}
+              />
             </div>
           </Row>
 
-          <Row className="row-four">
-            <SaveButton>Salvar alterações</SaveButton>
+          <Row className="row-four" onClick={handleNewNote}>
+            <SaveButton >Salvar alterações</SaveButton>
           </Row>
 
 

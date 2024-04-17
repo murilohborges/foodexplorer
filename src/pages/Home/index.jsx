@@ -3,6 +3,7 @@ import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Section } from "../../components/Section/index.jsx";
 import { Plate } from "../../components/Plate/index.jsx";
+import plateIcon from '../../assets/plateIcon.png'
 
 
 export function Home() {
