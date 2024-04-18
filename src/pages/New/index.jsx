@@ -39,7 +39,23 @@ export function New() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
-  async function handleNewNote(){
+  async function handleNewPlate(){
+    if (!title) {
+      return alert("Digite o título do prato");
+    }
+
+    if (!price) {
+      return alert("Digite o preço do prato");
+    }
+
+    if (!description) {
+      return alert("Digite a descrição do prato");
+    }
+
+    if (newIngredient) {
+      return alert("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
+    }
+
     const response = await api.post("/plates", {
       title,
       category,
@@ -169,7 +185,7 @@ export function New() {
             </div>
           </Row>
 
-          <Row className="row-four" onClick={handleNewNote}>
+          <Row className="row-four" onClick={handleNewPlate}>
             <SaveButton >Salvar alterações</SaveButton>
           </Row>
 
