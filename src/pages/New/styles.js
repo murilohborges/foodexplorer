@@ -267,34 +267,39 @@ export const SaveButton = styled.button`
 `;
 
 export const Avatar = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 
-  background-color: ${({ theme }) => theme.COLORS.DARK_800};
-  color: ${({ theme }) => theme.COLORS.LIGHT_400};
-  border-radius: 8px;
-  width: 100%;
-  height: 3rem;
+  .file-label{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-  padding-left: 2rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    border-radius: 8px;
+    width: 100%;
+    height: 3rem;
 
-  background-color: ${({ theme }) => theme.COLORS.ORANGE};
+    padding-left: 2rem;
 
-  cursor: pointer;
+    background-color: ${({ theme }) => theme.COLORS.ORANGE};
 
-  @media(min-width: ${DEVICE_BREAKPOINTS.LG}){
-    padding-left: 0;
-    justify-content: center;
+    cursor: pointer;
+
+    @media(min-width: ${DEVICE_BREAKPOINTS.LG}){
+      padding-left: 0;
+      justify-content: center;
+    }
+
+    > p {
+      font-size: 0.875rem;
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    }
+    > input {
+      display: none;
+    }
   }
 
-  > p {
-    font-size: 0.875rem;
-    font-weight: 500;
-    font-family: "Poppins", sans-serif;
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-  }
-  > input {
-    display: none;
-  }
+  
 `;
