@@ -20,7 +20,7 @@ export function New() {
   const [price, setPrice] = useState("00,00");
   const [description, setDescription] = useState("");
 
-  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${plate.avatar}` : plateIcon;
+  const avatarUrl = plateIcon;
 
   const [avatar, setAvatar] = useState(avatarUrl);
   const [avatarFile, setAvatarFile] = useState(null);
@@ -66,9 +66,28 @@ export function New() {
       ingredients,
       price,
       description
-    });    
+    });
 
-    console.log(response.data)
+    const newPlateId = response.data.plate_id;
+
+    try {
+      if(avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+
+        
+  
+        const response = await api.patch(`/plates/avatar/${newPlateId}`, fileUploadForm);
+      }
+    }catch(error) {
+      if(error.response) {
+        alert(error.response.data.message);
+      }else{
+        alert("Não foi possível atualizar.")
+      }
+    }
+    
+    
 
     alert("Nota criada com sucesso");
     navigate("/");
