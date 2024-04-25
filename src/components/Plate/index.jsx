@@ -1,10 +1,15 @@
 import { Container, PlateImage, EditIcon, DetailsButton } from './styles';
 import plateIcon from '../../assets/plateIcon.png'
 import { Link } from "react-router-dom";
+import { api } from '../../services/api';
 
 export function Plate({ data, ...rest }){
   const PlateTitle = `${data.title} >`;
-  const PlatePrice = `R$ ${data.price}`;
+  const PlatePriceFixed = Number(data.price).toFixed(2).replace(".",",");
+  const PlatePrice = `R$ ${PlatePriceFixed}`;
+  const PlateDescription = `${data.description}`;
+
+  const avatarUrl = data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : plateIcon;
 
   return(
     <Container {...rest}>
@@ -16,12 +21,12 @@ export function Plate({ data, ...rest }){
       </EditIcon>
 
       <PlateImage>
-        <img src={plateIcon} alt="Foto do prato"/>
+        <img src={avatarUrl} alt="Foto do prato"/>
       </PlateImage>
 
-      <DetailsButton to="/details/1" >{PlateTitle}</DetailsButton>
+      <DetailsButton to="/details/" >{PlateTitle}</DetailsButton>
 
-      <p>Massa fresca com camarões e pesto.</p>
+      <p>{PlateDescription}</p>
 
       <div className="price">{PlatePrice}</div>
 

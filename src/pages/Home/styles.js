@@ -52,13 +52,17 @@ export const Title = styled.div`
     font-weight: 600;
     font-size: 1.125rem;
     white-space: nowrap;
-    @media (max-width: 375px ){
+    @media (min-width: 375px ){
       font-size: 1rem;
     }
-    @media (max-width: 320px ){
+    @media (min-width: 320px ){
       font-size: .9rem;
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+      font-size: 2.1rem;
+      font-weight: 400;
+    }
+    @media (min-width: 830px ){
       font-size: 2.5rem;
       font-weight: 400;
     }

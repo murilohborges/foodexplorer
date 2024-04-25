@@ -3,15 +3,36 @@ import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Section } from "../../components/Section/index.jsx";
 import { Plate } from "../../components/Plate/index.jsx";
-import plateIcon from '../../assets/plateIcon.png'
+import plateIcon from '../../assets/plateIcon.png';
+import { useState, useEffect } from "react";
+import { api } from "../../services/api.js";
 
 
 export function Home() {
+  const [varSearch, setVarSearch] = useState("");
+  const [meals, setMeals] = useState([]);
+  const [mainPlates, setMainPlates] = useState([]);
+  const [desserts, setDesserts] = useState([]);
 
+  async function receivedSearch(search){
+    setVarSearch(search);
+  }
+  
+
+  useEffect(() => {
+    async function fetchPlates(){
+      const response = await api.get(`/plates?title=${varSearch}`);
+      setMeals(response.data.filter((plate) => plate.category === "Refeição"))
+      setMainPlates(response.data.filter((plate) => plate.category === "Prato principal"))
+      setDesserts(response.data.filter((plate) => plate.category === "Sobremesa"))
+    }
+
+    fetchPlates();
+  }, [varSearch]);
 
   return(
     <Container>
-      <Header/>
+      <Header receivedSearch={receivedSearch}/>
 
       <Title>
         <TitleImage/>
@@ -27,19 +48,15 @@ export function Home() {
         <Section title="Refeições">
           
           <WrapperPlates>
-            <Plate
-              data={{
-                title: 'Salada Ravanello',
-                price: '49,97'
-              }}
-            />
-
-            {/* <Plate
-              data={{
-                title: 'Salada Ravanello',
-                price: '49,97'
-              }}
-            /> */}
+            {
+              meals.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                />
+              ))
+            }
+            
           </WrapperPlates>
 
         </Section>
@@ -47,19 +64,14 @@ export function Home() {
         <Section title="Pratos principais">
           
           <WrapperPlates>
-            <Plate
-              data={{
-                title: 'Prugna Pie',
-                price: '79,97'
-              }}
-            />
-
-            {/* <Plate
-              data={{
-                title: 'Prugna Pie',
-                price: '79,97'
-              }}
-            /> */}
+            {
+              mainPlates.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                />
+              ))
+            }
           </WrapperPlates>
 
         </Section>
@@ -67,19 +79,14 @@ export function Home() {
         <Section title="Sobremesas">
           
           <WrapperPlates>
-            <Plate
-              data={{
-                title: 'Prugna Pie',
-                price: '79,97'
-              }}
-            />
-
-            {/* <Plate
-              data={{
-                title: 'Prugna Pie',
-                price: '79,97'
-              }}
-            /> */}
+            {
+              desserts.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                />
+              ))
+            }
           </WrapperPlates>
 
         </Section>

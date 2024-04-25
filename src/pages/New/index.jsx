@@ -101,9 +101,13 @@ export function New() {
     setAvatar(imagePreview);
   }
 
+  async function receivedSearch(search){
+    return
+  }
+
   return(
     <Container>
-      <Header/>
+      <Header receivedSearch={receivedSearch}/>
 
       <Main>
         <BackButton to="/">
