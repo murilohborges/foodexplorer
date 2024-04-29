@@ -19,6 +19,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.75rem;
   position: relative;
+  cursor: pointer;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     height: 28.875rem;
@@ -83,7 +84,7 @@ export const EditIcon = styled(Link)`
   
 `;
 
-export const DetailsButton = styled(Link)`
+export const DetailsButton = styled.div`
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 0.875rem;

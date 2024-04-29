@@ -24,7 +24,7 @@ export function Plate({ data, ...rest }){
         <img src={avatarUrl} alt="Foto do prato"/>
       </PlateImage>
 
-      <DetailsButton to="/details/" >{PlateTitle}</DetailsButton>
+      <DetailsButton  >{PlateTitle}</DetailsButton>
 
       <p>{PlateDescription}</p>
 

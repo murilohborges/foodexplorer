@@ -13,10 +13,11 @@ export const Main = styled.div`
   margin-bottom: 3.125rem;
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
 
   margin-left: 1rem;
 
@@ -115,6 +116,7 @@ export const PlateImage = styled.div`
   > img {
     width: 16.5rem;
     height: 16.5rem;
+    border-radius: 50%;
   }
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     > img {

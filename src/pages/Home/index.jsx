@@ -3,9 +3,9 @@ import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Section } from "../../components/Section/index.jsx";
 import { Plate } from "../../components/Plate/index.jsx";
-import plateIcon from '../../assets/plateIcon.png';
 import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
+import { useNavigate } from "react-router-dom";
 
 
 export function Home() {
@@ -13,6 +13,7 @@ export function Home() {
   const [meals, setMeals] = useState([]);
   const [mainPlates, setMainPlates] = useState([]);
   const [desserts, setDesserts] = useState([]);
+  const navigate = useNavigate();
 
   async function receivedSearch(search){
     setVarSearch(search);
@@ -29,6 +30,10 @@ export function Home() {
 
     fetchPlates();
   }, [varSearch]);
+
+  function handleDetails(id){
+    navigate(`/details/${id}`);
+  }
 
   return(
     <Container>
@@ -53,6 +58,7 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
+                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }
@@ -69,6 +75,7 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
+                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }
@@ -84,6 +91,7 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
+                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }
