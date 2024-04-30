@@ -38,8 +38,8 @@ export function Details() {
     setVarSearch(search);
   }
 
-  function handleEdit(id){
-    navigate(`/edit/${id}`);
+  function handleEdit(){
+    navigate(`/edit/${params.id}`);
   }
 
   return(
@@ -86,7 +86,7 @@ export function Details() {
 
               }
 
-            <Button className="button-edit" onClick={handleEdit()} title="Editar prato"/>
+            <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
 
             </TextInfo>
 
