@@ -10,7 +10,7 @@ export function Header({receivedSearch}) {
   const [search, setSearch] = useState("");
 
   function handleSignOut() {
-    navigation("/");
+    navigation(-1);
     signOut();
   }
 

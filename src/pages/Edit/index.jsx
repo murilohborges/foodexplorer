@@ -77,7 +77,7 @@ export function Edit() {
     }
     
     alert("Nota criada com sucesso");
-    navigate("/");
+    navigate(-1);
   }
 
   async function handleChangeAvatar(event){
@@ -86,6 +86,15 @@ export function Edit() {
 
     const imagePreview = URL.createObjectURL(file);
     setAvatar(imagePreview);
+  }
+
+  async function handleRemove(){
+    const confirm = window.confirm("Deseja realmente remover a nota?");
+
+    if(confirm) {
+      await api.delete(`/plates/${params.id}`);
+      navigate(-1);
+    }
   }
 
   async function receivedSearch(search){
@@ -213,7 +222,7 @@ export function Edit() {
           </Row>
 
           <Row className="row-four">
-            <DeleteButton>Excluir prato</DeleteButton>
+            <DeleteButton onClick={handleRemove} >Excluir prato</DeleteButton>
             <SaveButton onClick={handleEditPlate}>Salvar alterações</SaveButton>
           </Row>
 

@@ -29,7 +29,7 @@ export function Home() {
     }
 
     fetchPlates();
-  }, [varSearch]);
+  }, [varSearch, ]);
 
   function handleDetails(id){
     navigate(`/details/${id}`);
