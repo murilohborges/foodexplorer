@@ -93,7 +93,7 @@ export function Edit() {
 
     if(confirm) {
       await api.delete(`/plates/${params.id}`);
-      navigate(-1);
+      navigate(-2);
     }
   }
 
