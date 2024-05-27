@@ -53,7 +53,7 @@ export const Container = styled.div`
     font-size: 1rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 400;
     }
   }
@@ -69,8 +69,8 @@ export const PlateImage = styled.div`
     border-radius: 50%;
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
       display: block;
-      width: 11rem;
-      height: 11rem;
+      width: 9rem;
+      height: 9rem;
     }
   }
 `;

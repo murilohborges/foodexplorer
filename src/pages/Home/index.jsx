@@ -6,13 +6,16 @@ import { Plate } from "../../components/Plate/index.jsx";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
 import { useNavigate } from "react-router-dom";
+import { Swiper} from '../../components/SwiperContainer/index.jsx';
+import { Pagination } from 'swiper/modules';
+import { BsDisplay } from "react-icons/bs";
 
 
 export function Home() {
   const [varSearch, setVarSearch] = useState("");
   const [meals, setMeals] = useState([]);
-  const [mainPlates, setMainPlates] = useState([]);
   const [desserts, setDesserts] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const navigate = useNavigate();
 
   async function receivedSearch(search){
@@ -24,8 +27,8 @@ export function Home() {
     async function fetchPlates(){
       const response = await api.get(`/plates?title=${varSearch}`);
       setMeals(response.data.filter((plate) => plate.category === "Refeição"))
-      setMainPlates(response.data.filter((plate) => plate.category === "Prato principal"))
       setDesserts(response.data.filter((plate) => plate.category === "Sobremesa"))
+      setDrinks(response.data.filter((plate) => plate.category === "Bebida"))
     }
 
     fetchPlates();
@@ -53,32 +56,23 @@ export function Home() {
         <Section title="Refeições">
           
           <WrapperPlates>
-            {
-              meals.map(plate => (
-                <Plate
-                  key={String(plate.id)}
-                  data={plate}
-                  onClick={() => handleDetails(plate.id)}
-                />
-              ))
-            }
+            <Swiper
+              slidesPerView={1}
+              centeredSlides={true}
+              className="swiper-meals"
+            >
+              {
+                meals.map(plate => (
+                  <Plate
+                    key={String(plate.id)}
+                    data={plate}
+                    onClick={() => handleDetails(plate.id)}
+                  />
+                ))
+              }
+            </Swiper>
+              
             
-          </WrapperPlates>
-
-        </Section>
-
-        <Section title="Pratos principais">
-          
-          <WrapperPlates>
-            {
-              mainPlates.map(plate => (
-                <Plate
-                  key={String(plate.id)}
-                  data={plate}
-                  onClick={() => handleDetails(plate.id)}
-                />
-              ))
-            }
           </WrapperPlates>
 
         </Section>
@@ -88,6 +82,22 @@ export function Home() {
           <WrapperPlates>
             {
               desserts.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                  onClick={() => handleDetails(plate.id)}
+                />
+              ))
+            }
+          </WrapperPlates>
+
+        </Section>
+
+        <Section title="Bebidas">
+          
+          <WrapperPlates>
+            {
+              drinks.map(plate => (
                 <Plate
                   key={String(plate.id)}
                   data={plate}
