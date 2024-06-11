@@ -105,17 +105,5 @@ export const TitleImage = styled.div`
 `;
 
 export const Main = styled.div`
-  margin-left: 6rem;
-  margin-right: 6rem;
-`;
-
-export const WrapperPlates = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  margin-bottom: 1.5rem;
-  @media (min-width: ${DEVICE_BREAKPOINTS.MD}){
-    margin-bottom: 2rem;
-  }
+  padding: 0 6rem;
 `;

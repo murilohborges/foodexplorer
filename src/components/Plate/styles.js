@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export const Container = styled.div`
-  width: 13.125rem;
   height: 18.25rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
   
@@ -23,7 +22,6 @@ export const Container = styled.div`
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     height: 28.875rem;
-    width: 19rem;
     padding-top: 4.16rem;
     padding-bottom: 4.16rem;
     gap: 0.94rem;

@@ -1,4 +1,4 @@
-import { Container, Title, TitleImage, Main, WrapperPlates } from "./styles.js";
+import { Container, Title, TitleImage, Main } from "./styles.js";
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Section } from "../../components/Section/index.jsx";
@@ -6,9 +6,7 @@ import { Plate } from "../../components/Plate/index.jsx";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
 import { useNavigate } from "react-router-dom";
-import { Swiper} from '../../components/SwiperContainer/index.jsx';
-import { Pagination } from 'swiper/modules';
-import { BsDisplay } from "react-icons/bs";
+import { Swiper } from '../../components/SwiperContainer/index.jsx';
 
 
 export function Home() {
@@ -55,33 +53,15 @@ export function Home() {
         
         <Section title="Refeições">
           
-          <WrapperPlates>
-            <Swiper
-              slidesPerView={1}
-              centeredSlides={true}
-              className="swiper-meals"
-            >
-              {
-                meals.map(plate => (
-                  <Plate
-                    key={String(plate.id)}
-                    data={plate}
-                    onClick={() => handleDetails(plate.id)}
-                  />
-                ))
-              }
-            </Swiper>
-              
-            
-          </WrapperPlates>
-
-        </Section>
-
-        <Section title="Sobremesas">
-          
-          <WrapperPlates>
+          <Swiper
+            slidesPerView={4}
+            centeredSlides={false}
+            spaceBetween={20}
+            className="swiper-meals"
+            loop={true}
+          >
             {
-              desserts.map(plate => (
+              meals.map(plate => (
                 <Plate
                   key={String(plate.id)}
                   data={plate}
@@ -89,23 +69,35 @@ export function Home() {
                 />
               ))
             }
-          </WrapperPlates>
+          </Swiper>
+
+        </Section>
+
+        <Section title="Sobremesas">
+
+          {
+            desserts.map(plate => (
+              <Plate
+                key={String(plate.id)}
+                data={plate}
+                onClick={() => handleDetails(plate.id)}
+              />
+            ))
+          }
 
         </Section>
 
         <Section title="Bebidas">
           
-          <WrapperPlates>
-            {
-              drinks.map(plate => (
-                <Plate
-                  key={String(plate.id)}
-                  data={plate}
-                  onClick={() => handleDetails(plate.id)}
-                />
-              ))
-            }
-          </WrapperPlates>
+          {
+            drinks.map(plate => (
+              <Plate
+                key={String(plate.id)}
+                data={plate}
+                onClick={() => handleDetails(plate.id)}
+              />
+            ))
+          }
 
         </Section>
 

@@ -13,7 +13,7 @@ export function Plate({ data, ...rest }){
   const avatarUrl = data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : plateIcon;
 
   return(
-    <SwiperSlide>
+    <swiper-slide>
       <Container {...rest}>
 
         <EditIcon>
@@ -26,7 +26,7 @@ export function Plate({ data, ...rest }){
           <img src={avatarUrl} alt="Foto do prato"/>
         </PlateImage>
 
-        <DetailsButton  >{PlateTitle}</DetailsButton>
+        <DetailsButton>{PlateTitle}</DetailsButton>
 
         <p>{PlateDescription}</p>
 
@@ -34,6 +34,6 @@ export function Plate({ data, ...rest }){
 
         
       </Container>
-    </SwiperSlide>
+    </swiper-slide>
   )
 };

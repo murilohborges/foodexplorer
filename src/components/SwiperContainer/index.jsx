@@ -14,6 +14,10 @@ export function Swiper(props) {
     register();
 
     const params = {
+      navigation: {
+        nextEl: '.right-arrow',
+        prevEl: '.left-arrow',
+      },
       ...rest
     };
 
@@ -24,9 +28,21 @@ export function Swiper(props) {
 
   return (
     <Container>
+      <div className="left-shadow" />
+      <button className="left-arrow" >
+        <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8839 0.616117C15.372 1.10427 15.372 1.89573 14.8839 2.38388L3.26777 14L14.8839 25.6161C15.372 26.1043 15.372 26.8957 14.8839 27.3839C14.3957 27.872 13.6043 27.872 13.1161 27.3839L0.616117 14.8839C0.127961 14.3957 0.127961 13.6043 0.616117 13.1161L13.1161 0.616117C13.6043 0.127961 14.3957 0.127961 14.8839 0.616117Z" fill="white"/>
+        </svg>
+      </button>
       <swiper-container init="false" ref={swiperRef}>
         {children}
-      </swiper-container> 
+      </swiper-container>
+      <button className="right-arrow">
+        <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.11612 0.616117C1.60427 0.127961 2.39573 0.127961 2.88388 0.616117L15.3839 13.1161C15.872 13.6043 15.872 14.3957 15.3839 14.8839L2.88388 27.3839C2.39573 27.872 1.60427 27.872 1.11612 27.3839C0.627961 26.8957 0.627961 26.1043 1.11612 25.6161L12.7322 14L1.11612 2.38388C0.627961 1.89573 0.627961 1.10427 1.11612 0.616117Z" fill="white"/>
+        </svg>
+      </button>
+      <div className="right-shadow" />
     </Container>
     
   );
