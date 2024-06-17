@@ -15,11 +15,15 @@ export function Home() {
   const [desserts, setDesserts] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const navigate = useNavigate();
+  const numberMealsCreated = meals.length;
+  const numberDessertsCreated = desserts.length;
+  const numberDrinksCreated = drinks.length;
+
 
   async function receivedSearch(search){
     setVarSearch(search);
   }
-  
+
 
   useEffect(() => {
     async function fetchPlates(){
@@ -28,6 +32,7 @@ export function Home() {
       setDesserts(response.data.filter((plate) => plate.category === "Sobremesa"))
       setDrinks(response.data.filter((plate) => plate.category === "Bebida"))
     }
+    
 
     fetchPlates();
   }, [varSearch, ]);
@@ -55,10 +60,13 @@ export function Home() {
           
           <Swiper
             slidesPerView={4}
-            centeredSlides={false}
+            centeredSlides={true}
             spaceBetween={20}
             className="swiper-meals"
-            loop={true}
+            loop={false}
+            indexLeftArrow="swiper-meals-left"
+            indexRightArrow="swiper-meals-right"
+            numberElements={numberMealsCreated}
           >
             {
               meals.map(plate => (
@@ -74,30 +82,51 @@ export function Home() {
         </Section>
 
         <Section title="Sobremesas">
+          <Swiper
+            slidesPerView={4}
+            centeredSlides={true}
+            spaceBetween={20}
+            className="swiper-desserts"
+            loop={false}
+            indexLeftArrow="swiper-desserts-left"
+            indexRightArrow="swiper-desserts-right"
+            numberElements={numberDessertsCreated}
+          >
 
-          {
-            desserts.map(plate => (
-              <Plate
-                key={String(plate.id)}
-                data={plate}
-                onClick={() => handleDetails(plate.id)}
-              />
-            ))
-          }
+            {
+              desserts.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                  onClick={() => handleDetails(plate.id)}
+                />
+              ))
+            }
+          </Swiper>
 
         </Section>
 
         <Section title="Bebidas">
-          
-          {
-            drinks.map(plate => (
-              <Plate
-                key={String(plate.id)}
-                data={plate}
-                onClick={() => handleDetails(plate.id)}
-              />
-            ))
-          }
+          <Swiper
+            slidesPerView={4}
+            centeredSlides={true}
+            spaceBetween={20}
+            className="swiper-drinks"
+            loop={false}
+            indexLeftArrow="swiper-drinks-left"
+            indexRightArrow="swiper-drinks-right"
+            numberElements={numberDrinksCreated}
+          >
+            {
+              drinks.map(plate => (
+                <Plate
+                  key={String(plate.id)}
+                  data={plate}
+                  onClick={() => handleDetails(plate.id)}
+                />
+              ))
+            }
+          </Swiper>
 
         </Section>
 

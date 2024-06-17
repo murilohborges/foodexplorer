@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.div`
   align-items: center;
@@ -28,22 +29,29 @@ export const Container = styled.div`
     background: linear-gradient(90deg, rgba(0,10,15,0) 27%, rgba(0,10,15,1) 95%);
   }
 
-  > .left-arrow {
+  > .swiper-meals-left, .swiper-desserts-left, .swiper-drinks-left {
     position: absolute;
     left: 1.8rem;
     top: 11.875rem;
+  }
+
+  > button {
     z-index: 3;
     background: transparent;
     border: none;
+    @media (max-width: 375px ){
+      top: 6.5rem;
+    }
   }
 
-  > .right-arrow {
+  > .swiper-meals-right, .swiper-desserts-right, .swiper-drinks-right {
     position: absolute;
     right: 1.8rem;
     top: 11.875rem;
-    z-index: 3;
-    background: transparent;
-    border: none;
+  }
+
+  #hidden {
+    display: none;
   }
 
   > swiper-container {
