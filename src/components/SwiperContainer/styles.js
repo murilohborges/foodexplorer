@@ -50,10 +50,6 @@ export const Container = styled.div`
     top: 11.875rem;
   }
 
-  #hidden {
-    display: none;
-  }
-
   > swiper-container {
     width: 100%;
     overflow: hidden;
