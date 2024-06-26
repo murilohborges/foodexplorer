@@ -39,7 +39,7 @@ export const Title = styled.div`
     align-items: flex-start;
     margin-left: 12.8rem;
     @media (max-width: 375px ){
-      margin-left: 11.3rem;
+      margin-left: 9.3rem;
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
       align-items: center;
@@ -93,8 +93,8 @@ export const TitleImage = styled.div`
   left: -1.7rem;
   bottom: 0rem;
   @media (max-width: 375px ){
-    width: 12rem;
-    height: 10rem;
+    width: 10rem;
+    height: 8rem;
     left: -0.7rem;
   }
   @media (min-width: ${DEVICE_BREAKPOINTS.MD}){
@@ -105,5 +105,8 @@ export const TitleImage = styled.div`
 `;
 
 export const Main = styled.div`
-  padding: 0 6rem;
+  padding: 0 1rem 0 2.25rem;
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
+    padding: 0 6rem;
+  }
 `;

@@ -59,11 +59,7 @@ export function Home() {
         <Section title="Refeições">
           
           <Swiper
-            slidesPerView={4}
-            centeredSlides={true}
-            spaceBetween={20}
             className="swiper-meals"
-            loop={false}
             indexLeftArrow="swiper-meals-left"
             indexRightArrow="swiper-meals-right"
             numberElements={numberMealsCreated}
@@ -83,11 +79,7 @@ export function Home() {
 
         <Section title="Sobremesas">
           <Swiper
-            slidesPerView={4}
-            centeredSlides={true}
-            spaceBetween={20}
             className="swiper-desserts"
-            loop={false}
             indexLeftArrow="swiper-desserts-left"
             indexRightArrow="swiper-desserts-right"
             numberElements={numberDessertsCreated}
@@ -108,11 +100,7 @@ export function Home() {
 
         <Section title="Bebidas">
           <Swiper
-            slidesPerView={4}
-            centeredSlides={true}
-            spaceBetween={20}
             className="swiper-drinks"
-            loop={false}
             indexLeftArrow="swiper-drinks-left"
             indexRightArrow="swiper-drinks-right"
             numberElements={numberDrinksCreated}

@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/auth';
 import { USER_ROLE } from '../utils/roles';
 
 import { AdminRoutes } from "./admin.routes";
-import { CostumerRoutes } from "./costumer.routes";
+import { CustomerRoutes } from "./customer.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export function Routes(){
@@ -15,7 +15,7 @@ export function Routes(){
       case USER_ROLE.ADMIN:
         return <AdminRoutes/>
       case USER_ROLE.CUSTOMER:
-        return <CostumerRoutes/>
+        return <CustomerRoutes/>
       default:
         return <CustomerRoutes/>;
     }

@@ -9,23 +9,25 @@ export const Container = styled.div`
   justify-content: center;
   position: relative;
 
-  > .left-shadow {
+  > .left-shadow, .right-shadow {
     height: 100%;
     width: 14rem;
     z-index: 2;
     position: absolute;
-    left: 0;
     background: rgb(255,255,255);
+    display: ${({ $numberElements }) => $numberElements >= 4 ? "block" : "none"};
+    @media (max-width: 900px){
+      display: none;
+    }
+  }
+
+  > .left-shadow {
+    left: 0;
     background: linear-gradient(270deg, rgba(0,10,15,0) 27%, rgba(0,10,15,1) 95%);
   }
 
   > .right-shadow {
-    height: 100%;
-    width: 14rem;
-    z-index: 2;
-    position: absolute;
     right: 0;
-    background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(0,10,15,0) 27%, rgba(0,10,15,1) 95%);
   }
 
@@ -39,8 +41,9 @@ export const Container = styled.div`
     z-index: 3;
     background: transparent;
     border: none;
-    @media (max-width: 375px ){
-      top: 6.5rem;
+    display: none;
+    @media (min-width: 900px){
+      display: ${({ $numberElements }) => $numberElements >= 4 ? "block" : "none"};
     }
   }
 

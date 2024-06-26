@@ -153,6 +153,46 @@ export const ButtonNewPlate = styled(Link)`
   }
 `;
 
+export const ButtonOrders = styled(Link)`
+  width: 13.5rem;
+  background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  
+  height: 3rem;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.75rem 2.14rem;
+
+  white-space: nowrap;
+  font-weight: 400;
+  font-size: 0.875rem;
+  font-family: "Poppins", sans-serif;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  display: none;
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+`;
+
+export const ButtonMyFavourites = styled(Link)`
+  width: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 2.2rem;
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    display: none;
+  }
+`;
+
 export const ButtonLogout = styled.button`
   background-color: transparent;
   border: 0;

@@ -25,6 +25,27 @@ export const Container = styled.div`
     padding-top: 4.16rem;
     padding-bottom: 4.16rem;
     gap: 0.94rem;
+    width: 19.125rem;
+  }
+
+  @media(min-width: 320px){
+    width: 10.5rem;
+  }
+
+  @media(min-width: 640px){
+    width: 12.5rem;
+  }
+
+  @media(min-width: 768px){
+    width: 19.125rem;
+  }
+
+  @media(min-width: 900px){
+    width: 16.5rem;
+  }
+
+  @media(min-width: 1000px){
+    width: 19.125rem;
   }
 
   > svg {
@@ -78,8 +99,13 @@ export const EditIcon = styled(Link)`
   top: 1rem;
   right: 1rem;
   cursor: pointer;
+`;
 
-  
+export const FavIcon = styled(Link)`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
 `;
 
 export const DetailsButton = styled.div`
