@@ -191,6 +191,20 @@ export const ButtonMyFavourites = styled(Link)`
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: none;
   }
+
+  > .counter-fav {
+    color: white;
+    font-family: "Poppins", sans-serif;
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    right: -6px;
+    top: -7px;
+
+  }
 `;
 
 export const ButtonLogout = styled.button`

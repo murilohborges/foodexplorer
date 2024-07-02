@@ -52,6 +52,10 @@ export function New() {
       return alert("Digite a descrição do prato");
     }
 
+    if (!newIngredient) {
+      return alert("Você deixou o campo ingredientes vazio, adicione pelo menos um")
+    }
+
     if (newIngredient) {
       return alert("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
     }

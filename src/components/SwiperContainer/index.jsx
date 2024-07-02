@@ -30,8 +30,7 @@ export function Swiper(props) {
         380: {
           spaceBetween: 5,
           slidesPerView: 2,
-          centeredSlidesBounds: true,
-          centeredSlides: true,
+          centeredSlidesBounds: true
         },
         540: {
           spaceBetween: 0,
@@ -43,8 +42,8 @@ export function Swiper(props) {
         640: {
           spaceBetween: 0,
           slidesPerView: 3,
-          centeredSlides: false,
-          loop: true,
+          centeredSlidesBounds: true,
+          centeredSlides: true,
           ...rest
         },
         768: {

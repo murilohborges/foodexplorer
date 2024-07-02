@@ -10,8 +10,8 @@ export const Container = styled.div`
   border: none;
   border-radius: 8px;
 
-  padding-top: 4.375rem;
-  padding-bottom: 4.375rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ export const Container = styled.div`
   }
 
   @media(min-width: 320px){
-    width: 10.5rem;
+    width: 11.5rem;
   }
 
   @media(min-width: 640px){
@@ -76,6 +76,15 @@ export const Container = styled.div`
       font-weight: 400;
     }
   }
+
+  .include-button {
+    border: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    font-family: "Roboto", sans-serif;
+    padding: 0.4rem 3.6rem;
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    border-radius: 5px;
+  } 
 `;
 
 export const PlateImage = styled.div`
@@ -122,4 +131,15 @@ export const DetailsButton = styled.div`
   }
 `;
 
+export const ControlNumberPlates = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.75rem;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  font-family: "Roboto", sans-serif;
+
+`;
 
