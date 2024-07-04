@@ -37,6 +37,12 @@ export const Container = styled.div`
     @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
       font-size: 0.8rem;
       max-height: 100vh;
+      margin-left: 2rem;
+    }
+    @media (max-width: 360px) {
+      font-size: 0.8rem;
+      max-height: 100vh;
+      margin-left: 2rem;
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
       font-size: 1rem;
@@ -46,10 +52,10 @@ export const Container = styled.div`
 
   > p {
     font-weight: normal;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
     @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       max-height: 100vh;
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {

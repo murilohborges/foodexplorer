@@ -14,7 +14,6 @@ export function Home() {
   const [meals, setMeals] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const navigate = useNavigate();
   const numberMealsCreated = meals.length;
   const numberDessertsCreated = desserts.length;
   const numberDrinksCreated = drinks.length;
@@ -36,10 +35,6 @@ export function Home() {
 
     fetchPlates();
   }, [varSearch, ]);
-
-  function handleDetails(id){
-    navigate(`/details/${id}`);
-  }
 
   return(
     <Container>
@@ -69,7 +64,6 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
-                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }
@@ -90,7 +84,6 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
-                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }
@@ -110,7 +103,6 @@ export function Home() {
                 <Plate
                   key={String(plate.id)}
                   data={plate}
-                  onClick={() => handleDetails(plate.id)}
                 />
               ))
             }

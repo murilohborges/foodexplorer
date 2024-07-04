@@ -6,7 +6,9 @@ import { Tag } from "../../components/Tag/index.jsx";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth.jsx";
 import { api } from "../../services/api.js";
+import { USER_ROLE } from '../../utils/roles.js'
 
 import plateIcon from '../../assets/plateIcon.png'
 
@@ -15,6 +17,7 @@ export function Details() {
   const [avatar, setAvatar] = useState(plateIcon);
   const [varSearch, setVarSearch] = useState("");
   const avatarUrl = avatar ? `${api.defaults.baseURL}/files/${avatar}` : plateIcon;
+  const { user } = useAuth();
 
   const params = useParams();
   const navigate = useNavigate();
@@ -86,7 +89,14 @@ export function Details() {
 
               }
 
-            <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
+          {
+            [USER_ROLE.ADMIN].includes(user.role) && 
+            <>
+              <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
+            </> 
+          }
+
+            
 
             </TextInfo>
 

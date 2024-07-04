@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { api } from '../../services/api';
 import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function Plate({ data, ...rest }){
   const PlateTitle = `${data.title} >`;
@@ -12,8 +14,30 @@ export function Plate({ data, ...rest }){
   const PlatePrice = `R$ ${PlatePriceFixed}`;
   const PlateDescription = `${data.description}`;
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const avatarUrl = data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : plateIcon;
+  const [numberOrders, setNumberOrders] = useState(Number('0'));
+  
+
+  function handleDetails(id){
+    const plateId = `${data.id}`;
+    id = plateId;
+    navigate(`/details/${id}`);
+  }
+
+  function handleIncrease(){
+    setNumberOrders(numberOrders + 1);
+  }
+
+  function handleDecrease(){
+    if(numberOrders <= 0){
+      setNumberOrders(0);
+      return
+    } else {
+      setNumberOrders(numberOrders - 1);
+    }
+  }
+
 
   return(
     <swiper-slide>
@@ -45,7 +69,7 @@ export function Plate({ data, ...rest }){
           <img src={avatarUrl} alt="Foto do prato"/>
         </PlateImage>
 
-        <DetailsButton>{PlateTitle}</DetailsButton>
+        <DetailsButton onClick={handleDetails}>{PlateTitle}</DetailsButton>
 
         <p>{PlateDescription}</p>
 
@@ -55,14 +79,18 @@ export function Plate({ data, ...rest }){
           [USER_ROLE.CUSTOMER].includes(user.role) && 
           <>
             <ControlNumberPlates>
-              <svg width="18" height="2" viewBox="0 0 18 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.335786 0 0.75 0H17.25C17.6642 0 18 0.447715 18 1C18 1.55228 17.6642 2 17.25 2H0.75C0.335786 2 0 1.55228 0 1Z" fill="white"/>
-              </svg>
-              01
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 8.58579 0.335786 8.25 0.75 8.25H17.25C17.6642 8.25 18 8.58579 18 9C18 9.41421 17.6642 9.75 17.25 9.75H0.75C0.335786 9.75 0 9.41421 0 9Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C9.41421 0 9.75 0.335786 9.75 0.75V17.25C9.75 17.6642 9.41421 18 9 18C8.58579 18 8.25 17.6642 8.25 17.25V0.75C8.25 0.335786 8.58579 0 9 0Z" fill="white"/>
-              </svg>
+              <button className='decreasse-button' onClick={handleDecrease}>
+                <svg width="18" height="2" viewBox="0 0 18 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.335786 0 0.75 0H17.25C17.6642 0 18 0.447715 18 1C18 1.55228 17.6642 2 17.25 2H0.75C0.335786 2 0 1.55228 0 1Z" fill="white"/>
+                </svg>
+              </button>
+              {numberOrders}
+              <button className='increase-button' onClick={handleIncrease}>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 8.58579 0.335786 8.25 0.75 8.25H17.25C17.6642 8.25 18 8.58579 18 9C18 9.41421 17.6642 9.75 17.25 9.75H0.75C0.335786 9.75 0 9.41421 0 9Z" fill="white"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C9.41421 0 9.75 0.335786 9.75 0.75V17.25C9.75 17.6642 9.41421 18 9 18C8.58579 18 8.25 17.6642 8.25 17.25V0.75C8.25 0.335786 8.58579 0 9 0Z" fill="white"/>
+                </svg>
+              </button>
             </ControlNumberPlates>
 
             <button className='include-button'>Incluir</button>

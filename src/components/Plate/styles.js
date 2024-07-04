@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
-import { Link } from "react-router-dom";
-
 
 export const Container = styled.div`
   height: 18.25rem;
@@ -18,7 +16,6 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.75rem;
   position: relative;
-  cursor: pointer;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     height: 28.875rem;
@@ -103,14 +100,14 @@ export const PlateImage = styled.div`
   }
 `;
 
-export const EditIcon = styled(Link)`
+export const EditIcon = styled.div`
   position: absolute;
   top: 1rem;
   right: 1rem;
   cursor: pointer;
 `;
 
-export const FavIcon = styled(Link)`
+export const FavIcon = styled.div`
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -124,6 +121,7 @@ export const DetailsButton = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
   background: transparent;
   border: none;
+  cursor: pointer;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     font-size: 1.5rem;
@@ -140,6 +138,16 @@ export const ControlNumberPlates = styled.div`
 
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
   font-family: "Roboto", sans-serif;
+
+  > button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 18px;
+  }
 
 `;
 
