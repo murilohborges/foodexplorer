@@ -126,3 +126,45 @@ export const PlateImage = styled.div`
   }
 `;
 
+export const ControlNumberPlates = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.75rem;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  font-family: "Roboto", sans-serif;
+
+  > button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 18px;
+  }
+
+  > .include-button {
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    border-radius: 4px;
+    width: 15rem;
+    height: 2.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+
+    @media(min-width: ${DEVICE_BREAKPOINTS.XS}){
+      font-size: 0.8rem;
+      width: 12rem;
+    }
+  }
+
+`;
