@@ -3,9 +3,19 @@ import introImage from "../../assets/title.png";
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.div`
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD} ){
+    display: grid;
+    grid-template-areas: 
+    "menu top",
+    "menu title",
+    "menu content",
+    "menu footer";
+  }
+  
 `;
 
 export const Title = styled.div`
+  grid-area: "title";
   background: rgb(9,29,38);
   background: linear-gradient(180deg, rgba(9,29,38,1) 0%, rgba(0,19,28,1) 100%);
   border-radius: 3px;
@@ -105,6 +115,7 @@ export const TitleImage = styled.div`
 `;
 
 export const Main = styled.div`
+  grid-area: "content";
   padding: 0 1rem 0 2.25rem;
   @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
     padding: 0 6rem;

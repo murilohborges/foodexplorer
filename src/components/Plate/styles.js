@@ -8,7 +8,7 @@ export const Container = styled.div`
   border: none;
   border-radius: 8px;
 
-  padding-top: 1.5rem;
+  padding-top: 3rem;
   padding-bottom: 1.5rem;
 
   display: flex;
