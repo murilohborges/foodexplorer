@@ -6,6 +6,7 @@ export const Container = styled.div`
   background: ${({ theme }) => theme.COLORS.DARK_700};
   height: 7.125rem;
   width: 100%;
+  grid-area: "top";
 
   display: flex;
   align-items: center;
@@ -36,6 +37,8 @@ export const Container = styled.div`
     > .menu-button{
       position: absolute;
       left: 2.2rem;
+      border: none;
+      background: transparent;
       @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
         svg {
           width: 1.2rem;
