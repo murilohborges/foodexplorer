@@ -3,6 +3,7 @@ import introImage from "../../assets/title.png";
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.div`
+  width: 100%;
   position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   overflow-x: hidden;
   display: grid; 

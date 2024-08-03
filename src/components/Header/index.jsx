@@ -9,7 +9,6 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
   const { signOut } = useAuth();
   const navigation = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const { user } = useAuth();
 
   function handleSignOut() {
@@ -17,9 +16,8 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
     signOut();
   }
 
-  async function handleOpenMenu(){
-    setIsOpenMenu(true)
-    receivedMenuIsOpen(isOpenMenu)
+  function handleOpenMenu(){
+    receivedMenuIsOpen(true);
   }
 
   useEffect(() => {

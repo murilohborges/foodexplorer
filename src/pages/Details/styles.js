@@ -3,6 +3,8 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
+  width: 100%;
+  position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   display: flex;
   flex-direction: column;
   align-items: center;

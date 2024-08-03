@@ -3,6 +3,7 @@ import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Button } from "../../components/Button/index.jsx";
 import { Tag } from "../../components/Tag/index.jsx";
+import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -15,7 +16,7 @@ import plateIcon from '../../assets/plateIcon.png'
 export function Details() {
   const [data, setData] = useState(null);
   const [avatar, setAvatar] = useState(plateIcon);
-  const [varSearch, setVarSearch] = useState("");
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const avatarUrl = avatar ? `${api.defaults.baseURL}/files/${avatar}` : plateIcon;
   const { user } = useAuth();
   const [numberOrders, setNumberOrders] = useState(Number('0'));
@@ -39,7 +40,15 @@ export function Details() {
   }, [])
 
   async function receivedSearch(search){
-    setVarSearch(search);
+    return
+  }
+
+  async function receivedMenuIsOpen(isOpen){
+    setMenuIsOpen(isOpen);
+  }
+
+  async function onCloseMenu(){
+    setMenuIsOpen(false);
   }
 
   function handleEdit(){
@@ -60,8 +69,17 @@ export function Details() {
   }
 
   return(
-    <Container>
-      <Header receivedSearch={receivedSearch}/>
+    <Container $menuIsOpen={menuIsOpen}>
+      <SideMenu
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={onCloseMenu}
+        receivedSearch={receivedSearch}
+      />
+
+      <Header 
+        receivedSearch={receivedSearch}
+        receivedMenuIsOpen={receivedMenuIsOpen}
+      />
 
       <Main>
 

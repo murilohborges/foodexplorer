@@ -3,6 +3,26 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
+  width: 100%;
+  position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
+  display: grid; 
+  grid-template-columns: 100%; 
+  grid-template-rows: 7.125rem auto; 
+  grid-template-areas: 
+    "top"
+    "main";
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+    "top"
+    "main";
+  }
+`;
+
+export const FixedContent = styled.section`
+  grid-area: "main";
 `;
 
 export const BackButton = styled(Link)`
