@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-  height: 18.25rem;
+  height: fit-content;
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
   
   border: none;
@@ -18,7 +18,6 @@ export const Container = styled.div`
   position: relative;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-    height: 28.875rem;
     padding-top: 4.16rem;
     padding-bottom: 4.16rem;
     gap: 0.94rem;
@@ -56,6 +55,8 @@ export const Container = styled.div`
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 0.875rem;
+    text-align: center;
+    margin: auto 1rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
     display: none;
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){

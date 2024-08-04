@@ -83,8 +83,8 @@ export function Edit() {
       }
     }
     
-    alert("Nota criada com sucesso");
-    navigate(-1);
+    alert("Prato editado com sucesso");
+    navigate("/");
   }
 
   async function handleChangeAvatar(event){
@@ -96,11 +96,11 @@ export function Edit() {
   }
 
   async function handleRemove(){
-    const confirm = window.confirm("Deseja realmente remover a nota?");
+    const confirm = window.confirm("Deseja realmente remover o prato?");
 
     if(confirm) {
       await api.delete(`/plates/${params.id}`);
-      navigate(-2);
+      navigate("/");
     }
   }
 

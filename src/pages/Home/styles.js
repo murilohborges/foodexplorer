@@ -8,7 +8,7 @@ export const Container = styled.div`
   overflow-x: hidden;
   display: grid; 
   grid-template-columns: auto; 
-  grid-template-rows: 7.125rem auto; 
+  grid-template-rows: AUTO auto; 
   grid-template-areas: 
     "top"
     "main";
@@ -46,7 +46,7 @@ export const Title = styled.div`
   position: relative;
   
   @media (min-width: ${DEVICE_BREAKPOINTS.MD} ){
-    margin-top: 10.75rem;
+    margin-top: 6rem;
     margin-left: 6rem;
     margin-right: 6rem;
     display: grid;

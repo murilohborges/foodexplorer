@@ -54,6 +54,8 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
           </> 
         }
 
+        <ButtonMenu to="/">Meus favoritos</ButtonMenu>
+
         <ButtonMenu to="/" onClick={handleSignOut}>Sair</ButtonMenu>
         
       </ContentMenu>

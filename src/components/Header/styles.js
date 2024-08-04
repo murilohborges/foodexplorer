@@ -48,8 +48,14 @@ export const Container = styled.div`
       @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
         svg {
           display: none;
+          border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK_1000};
         }
       }
+    }
+
+    > .line {
+      width: 0;
+      border: solid 1px ;
     }
 
   }
@@ -154,6 +160,10 @@ export const ButtonNewPlate = styled(Link)`
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: block;
   }
+  @media(width: 768px) {
+    padding: 0.75rem 1rem;
+    width: 8rem;
+  }
 `;
 
 export const ButtonOrders = styled(Link)`
@@ -164,7 +174,7 @@ export const ButtonOrders = styled(Link)`
   height: 3rem;
   border: 0;
   border-radius: 10px;
-  padding: 0.75rem 2.14rem;
+  padding: 0.75rem 1rem;
 
   white-space: nowrap;
   font-weight: 400;
@@ -184,7 +194,7 @@ export const ButtonOrders = styled(Link)`
   }
 `;
 
-export const ButtonMyFavourites = styled(Link)`
+export const ButtonFavourite = styled(Link)`
   width: 2.3rem;
   display: flex;
   align-items: center;
@@ -217,4 +227,22 @@ export const ButtonLogout = styled.button`
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: block;
   }
+`;
+
+export const ButtonHeader = styled.button`
+  display: none;
+  width: 15rem;
+  cursor: pointer;
+
+  font-family: "Roboto", sans-serif;
+  color: ${({ theme }) => theme.COLORS.LIGHT_300};
+  line-height: 160%;
+  font-size: 0.875rem;
+  border: 0;
+  background-color: transparent;
+
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    display: inline-block;
+  }
+  
 `;

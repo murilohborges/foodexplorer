@@ -92,7 +92,7 @@ export function New() {
     
     
 
-    alert("Nota criada com sucesso");
+    alert("Prato criado com sucesso");
     navigate(-1);
   }
 

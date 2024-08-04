@@ -6,8 +6,11 @@ import { Plate } from "../../components/Plate/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
-import { useNavigate } from "react-router-dom";
+import { USER_ROLE } from '../../utils/roles.js';
+import { useAuth } from "../../hooks/auth.jsx";
+
 import { Swiper } from '../../components/SwiperContainer/index.jsx';
+import { PanelButton } from "../../components/PanelButton/index.jsx";
 
 
 export function Home() {
@@ -19,6 +22,7 @@ export function Home() {
   const numberDessertsCreated = desserts.length;
   const numberDrinksCreated = drinks.length;
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const { user } = useAuth();
 
   async function receivedSearch(search){
     setVarSearch(search);
@@ -59,6 +63,13 @@ export function Home() {
       />
 
       <FixedContent>
+        {
+          [USER_ROLE.ADMIN].includes(user.role) && 
+          <>
+            <PanelButton/>
+          </> 
+        }
+        
 
         <Title>
           <TitleImage/>
