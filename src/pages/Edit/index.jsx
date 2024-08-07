@@ -8,6 +8,7 @@ import { useState } from "react";
 import plateIcon from '../../assets/plateIcon.png';
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
+import { PanelButton } from "../../components/PanelButton/index.jsx";
 
 export function Edit() {
   const avatarUrl = plateIcon;
@@ -130,6 +131,8 @@ export function Edit() {
       />
 
       <FixedContent>
+        <PanelButton/>
+
         <Main>
           <BackButton onClick={handleBack}>
             <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">

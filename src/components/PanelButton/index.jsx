@@ -8,9 +8,13 @@ export function PanelButton(){
     navigation("/new");
   }
 
+  function handleToFavourites(){
+    navigation("/favourites");
+  }
+
   return (
     <Container>
-      <ButtonHeader>Meus Favoritos</ButtonHeader>
+      <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
 
       <ButtonHeader onClick={handleNewPlate}>Novo prato</ButtonHeader>
     </Container>

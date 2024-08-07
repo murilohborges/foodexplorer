@@ -3,6 +3,7 @@ import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Button } from "../../components/Button/index.jsx";
 import { Tag } from "../../components/Tag/index.jsx";
+import { PanelButton } from "../../components/PanelButton/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
@@ -80,6 +81,13 @@ export function Details() {
         receivedSearch={receivedSearch}
         receivedMenuIsOpen={receivedMenuIsOpen}
       />
+
+      {
+        [USER_ROLE.ADMIN].includes(user.role) && 
+        <>
+          <PanelButton/>
+        </> 
+      }
 
       <Main>
 

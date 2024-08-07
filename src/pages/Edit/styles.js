@@ -7,7 +7,7 @@ export const Container = styled.div`
   position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   display: grid; 
   grid-template-columns: 100%; 
-  grid-template-rows: 7.125rem auto; 
+  grid-template-rows: auto auto; 
   grid-template-areas: 
     "top"
     "main";
@@ -53,7 +53,7 @@ export const BackButton = styled(Link)`
 `;
 
 export const Main = styled.div`
-  margin: 0.75rem 2rem 3.4rem;
+  margin: 0.75rem 6rem 3.4rem;
 `;
 
 export const Form = styled.div`

@@ -19,6 +19,10 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
     onCloseMenu(false)
   }
 
+  function handleToFavourites(){
+    navigation("/favourites");
+  }
+
   useEffect(() => {
     receivedSearch(search);
   }, [search])
@@ -54,7 +58,7 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
           </> 
         }
 
-        <ButtonMenu to="/">Meus favoritos</ButtonMenu>
+        <ButtonMenu to="/favourites">Meus favoritos</ButtonMenu>
 
         <ButtonMenu to="/" onClick={handleSignOut}>Sair</ButtonMenu>
         

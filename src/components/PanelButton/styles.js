@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.section`
+  width: 100%;
   height: 4rem;
   display: flex;
   flex-direction: row;

@@ -20,6 +20,10 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
     receivedMenuIsOpen(true);
   }
 
+  function handleToFavourites(){
+    navigation("/favourites");
+  }
+
   useEffect(() => {
     receivedSearch(search);
   }, [search])
@@ -63,7 +67,7 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
         {
           [USER_ROLE.CUSTOMER].includes(user.role) && 
           <>
-            <ButtonHeader>Meus Favoritos</ButtonHeader>
+            <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
           </> 
         }
         
