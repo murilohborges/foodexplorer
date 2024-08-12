@@ -190,8 +190,8 @@ export function Edit() {
 
                 <select id="type" onChange={e => setCategory(e.target.value)}>
                   <option value="Refeição">Refeição</option>
-                  <option value="Prato principal">Prato principal</option>
                   <option value="Sobremesa">Sobremesa</option>
+                  <option value="Bebida">Bebida</option>
                 </select>
               </div>
             </Row>
