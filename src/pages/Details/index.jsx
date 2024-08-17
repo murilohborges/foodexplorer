@@ -69,6 +69,16 @@ export function Details() {
     }
   }
 
+  async function handleFavPlate() {
+    try{
+      const response = await api.post(`/favourites/${params.id}`);
+      alert("Prato favoritado com sucesso!");
+      navigate('/')
+    }catch(e){
+      alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
+    }
+  }
+
   return(
     <Container $menuIsOpen={menuIsOpen}>
       <SideMenu
@@ -132,7 +142,10 @@ export function Details() {
               {
                 [USER_ROLE.ADMIN].includes(user.role) && 
                 <>
-                  <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
+                  <div className="wrapper-buttons">
+                    <Button className="button-fav" onClick={handleFavPlate} title="Favoritar prato"/>
+                    <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
+                  </div>
                 </> 
               }
 

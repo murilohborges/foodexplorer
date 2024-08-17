@@ -271,7 +271,7 @@ export const Row = styled.div`
     }
 
     &:nth-child(5) {
-      padding-left: 70%;
+      padding-left: 60%;
     }
   }
 `;
@@ -294,6 +294,20 @@ export const DeleteButton = styled.button`
   width: 100%;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_800};
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  border: 0;
+
+  padding: 0.75rem 0;
+  border-radius: 5px;
+
+  font-size: 0.875rem;
+  font-family: "Poppins", sans-serif;
+`;
+
+export const FavButton = styled.button`
+  width: 100%;
+
+  background-color: ${({ theme }) => theme.COLORS.TOMATO_200};
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
   border: 0;
 

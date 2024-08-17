@@ -20,6 +20,10 @@ export const Info = styled.div`
     font-family: "Poppins", sans-serif;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     font-weight: 400;
+    cursor: pointer;
+  }
+  > h1:hover {
+    filter: brightness(0.7);
   }
 `;
 
@@ -27,7 +31,7 @@ export const PlateImage = styled.div`
   display: flex;
   align-items: center;
   margin-right: 0.8125rem;
-
+  cursor: pointer;
   > img {
     width: 4.5rem;
     height: 4.5rem;
@@ -38,13 +42,16 @@ export const PlateImage = styled.div`
       height: 9rem;
     }
   }
+  > img:hover {
+    filter: brightness(0.7);
+  }
 `;
 
 export const ButtonRemove = styled.button`
   border: 0;
   background: transparent;
 
-  font-size: 0.75rem;
-  color: ${({ theme }) => theme.COLORS.TOMATO_200};
-
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.COLORS.TOMATO_300};
+  font-weight: 600;
 `;

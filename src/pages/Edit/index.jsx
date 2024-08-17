@@ -1,4 +1,4 @@
-import { Container, BackButton, Main, Form, Avatar, SaveButton, DeleteButton, Row, FixedContent } from "./styles.js";
+import { Container, BackButton, Main, Form, Avatar, SaveButton, DeleteButton, Row, FixedContent, FavButton } from "./styles.js";
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Textarea } from "../../components/Textarea/index.jsx";
@@ -9,6 +9,7 @@ import plateIcon from '../../assets/plateIcon.png';
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
 import { PanelButton } from "../../components/PanelButton/index.jsx";
+import { Button } from "../../components/Button/index.jsx";
 
 export function Edit() {
   const avatarUrl = plateIcon;
@@ -115,6 +116,16 @@ export function Edit() {
 
   async function onCloseMenu(){
     setMenuIsOpen(false);
+  }
+
+  async function handleFavPlate() {
+    try{
+      const response = await api.post(`/favourites/${params.id}`);
+      alert("Prato favoritado com sucesso!");
+      navigate('/')
+    }catch(e){
+      alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
+    }
   }
 
   return(
@@ -250,6 +261,7 @@ export function Edit() {
             </Row>
 
             <Row className="row-four">
+              <FavButton onClick={handleFavPlate} >Favoritar prato</FavButton>
               <DeleteButton onClick={handleRemove} >Excluir prato</DeleteButton>
               <SaveButton onClick={handleEditPlate}>Salvar alterações</SaveButton>
             </Row>

@@ -39,8 +39,6 @@ export const PlateInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
   margin-top: 2.625rem;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
@@ -99,6 +97,12 @@ export const TextInfo = styled.div`
       align-items: start;
       justify-content: flex-start;
     }
+  }
+
+  > .wrapper-buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
   }
 
   > .button-edit{

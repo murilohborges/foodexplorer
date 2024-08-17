@@ -24,10 +24,12 @@ export const Container = styled.div`
 
 export const FixedContent = styled.section`
   grid-area: "main";
+  height: auto;
 `;
 
 export const Main = styled.div`
   margin: 2rem 6rem 3.4rem;
+  height: auto;
 
   > h1 {
     font-size: 2rem;
@@ -73,13 +75,33 @@ export const BackButton = styled(Link)`
 
 export const List = styled.div`
   width: 100%;
-  max-width: 100%;
-  min-height: 15rem;
+  min-height: 19rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 5rem;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-    display: grid;
+    display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "grid"};
     grid-template-columns: auto auto auto;
   }
 `;
+
+export const NoFavIcon = styled.div`
+  
+`;
+
+export const NoFavourites = styled.div`
+  display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "none"};
+  flex-direction: column;
+  gap: 5rem;
+  align-items: center;
+  border: 1px solid ${({ theme}) => theme.COLORS.LIGHT_500};
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 4rem;
+
+  font-family: "Poppins", sans-serif;
+  color: ${({ theme}) => theme.COLORS.LIGHT_500};
+
+  
+`
