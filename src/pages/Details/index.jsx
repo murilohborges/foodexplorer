@@ -92,12 +92,7 @@ export function Details() {
         receivedMenuIsOpen={receivedMenuIsOpen}
       />
 
-      {
-        [USER_ROLE.ADMIN].includes(user.role) && 
-        <>
-          <PanelButton/>
-        </> 
-      }
+      <PanelButton/>
 
       <Main>
 

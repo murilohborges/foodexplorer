@@ -63,12 +63,7 @@ export function Home() {
       />
 
       <FixedContent>
-        {
-          [USER_ROLE.ADMIN].includes(user.role) && 
-          <>
-            <PanelButton/>
-          </> 
-        }
+        <PanelButton/>
         
 
         <Title>
