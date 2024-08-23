@@ -20,6 +20,10 @@ export function Routes(){
     });
   }, []);
 
+  useEffect(() => {
+    console.log(user)
+  }, []);
+
   function AccessRoute() {
     switch(user.role){
       case USER_ROLE.ADMIN:

@@ -57,6 +57,7 @@ export function SignUp() {
           <label>Email</label>
           <Input 
             placeholder="Exemplo: exemplo@exemplo.com.br"
+            type='email'
             onChange={e => setEmail(e.target.value)}
           />
         </div>

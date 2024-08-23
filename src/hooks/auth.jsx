@@ -1,11 +1,23 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { api } from "../services/api";
 
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(() => {
+    const user = localStorage.getItem("@foodexplorer:user")
+
+    if (!user){
+      return{}
+    }
+
+    const userData = JSON.parse(user)
+
+    return {
+      user: userData
+    }
+  });
 
   async function signIn({ email, password }) {
 
@@ -31,20 +43,6 @@ function AuthProvider({ children }) {
 
     setData({});
   }
-
-
-  useEffect(() => {
-    const user = localStorage.getItem("@foodexplorer:user");
-    if(user != null || user != undefined){
-      console.log(user)
-      if(user.email && user.role) {
-        setData({
-          user: JSON.parse(user)
-        })
-      }
-    }
-
-  }, []);
 
   return (
     <AuthContext.Provider value={{ signIn, signOut, user: data.user}} >
