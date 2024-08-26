@@ -53,7 +53,7 @@ export const TextInfo = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  width: 100%;
+  width: 20rem;
 
   > h1 {
     color: ${({ theme }) => theme.COLORS.LIGHT_300};

@@ -124,7 +124,7 @@ export const InputSearch = styled.div`
     border: 0;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     font-family: "Roboto", sans-serif;
-    width: 15.5rem;
+    width: 90%;
     text-align: center;
     white-space: nowrap;
 

@@ -138,8 +138,8 @@ export function Details() {
                 [USER_ROLE.ADMIN].includes(user.role) && 
                 <>
                   <div className="wrapper-buttons">
-                    <Button className="button-fav" onClick={handleFavPlate} title="Favoritar prato"/>
-                    <Button className="button-edit" onClick={handleEdit} title="Editar prato"/>
+                    <Button className="button-fav" onClick={handleFavPlate} title="Favoritar"/>
+                    <Button className="button-edit" onClick={handleEdit} title="Editar"/>
                   </div>
                 </> 
               }

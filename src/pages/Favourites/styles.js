@@ -91,7 +91,7 @@ export const NoFavIcon = styled.div`
 `;
 
 export const NoFavourites = styled.div`
-  display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "none"};
+  display: ${({ $numberfavs }) => $numberfavs != 0 ? "none" : "flex"};
   flex-direction: column;
   gap: 5rem;
   align-items: center;
