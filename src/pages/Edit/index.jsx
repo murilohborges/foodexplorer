@@ -118,16 +118,6 @@ export function Edit() {
     setMenuIsOpen(false);
   }
 
-  async function handleFavPlate() {
-    try{
-      const response = await api.post(`/favourites/${params.id}`);
-      alert("Prato favoritado com sucesso!");
-      navigate('/')
-    }catch(e){
-      alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
-    }
-  }
-
   return(
     <Container $menuIsOpen={menuIsOpen}>
       <SideMenu
@@ -261,7 +251,6 @@ export function Edit() {
             </Row>
 
             <Row className="row-four">
-              <FavButton onClick={handleFavPlate} >Favoritar prato</FavButton>
               <DeleteButton onClick={handleRemove} >Excluir prato</DeleteButton>
               <SaveButton onClick={handleEditPlate}>Salvar alterações</SaveButton>
             </Row>

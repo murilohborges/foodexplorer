@@ -24,7 +24,13 @@ export function PanelButton(){
           <ButtonHeader onClick={handleNewPlate}>Novo prato</ButtonHeader>
         </> 
       }
-      <ButtonHeader >Histórico de pedidos</ButtonHeader>
+      {
+        [USER_ROLE.CUSTOMER].includes(user.role) && 
+        <>
+          <ButtonHeader >Histórico de pedidos</ButtonHeader>
+        </> 
+      }
+      
     </Container>
   )
 }

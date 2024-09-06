@@ -86,8 +86,8 @@ export const List = styled.div`
   }
 `;
 
-export const NoFavourites = styled.div`
-  display: ${({ $numberfavs }) => $numberfavs != 0 ? "none" : "flex"};
+export const EmptyCart = styled.div`
+  display: ${({ $numbercart }) => $numbercart != 0 ? "none" : "flex"};
   flex-direction: column;
   gap: 5rem;
   align-items: center;
@@ -98,6 +98,4 @@ export const NoFavourites = styled.div`
 
   font-family: "Poppins", sans-serif;
   color: ${({ theme}) => theme.COLORS.LIGHT_500};
-
-  
 `

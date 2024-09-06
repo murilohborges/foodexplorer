@@ -11,6 +11,7 @@ import { useAuth } from "../../hooks/auth.jsx";
 
 import { Swiper } from '../../components/SwiperContainer/index.jsx';
 import { PanelButton } from "../../components/PanelButton/index.jsx";
+import { RiOrderPlayFill } from "react-icons/ri";
 
 
 export function Home() {
@@ -22,6 +23,7 @@ export function Home() {
   const numberDessertsCreated = desserts.length;
   const numberDrinksCreated = drinks.length;
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const cartUser = [];
   const { user } = useAuth();
 
   async function receivedSearch(search){
@@ -32,10 +34,21 @@ export function Home() {
     setMenuIsOpen(isOpen);
   }
 
+  async function receivedOrderToCart(order){
+    const cartVerify = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
+    if(cartVerify === null){
+      cartUser.push(order);
+      localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartUser));
+    }else{
+      const cartUser = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
+      cartUser.push(order);
+      localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartUser));
+    }
+  }
+
   async function onCloseMenu(){
     setMenuIsOpen(false);
   }
-
 
   useEffect(() => {
     async function fetchPlates(){
@@ -44,8 +57,6 @@ export function Home() {
       setDesserts(response.data.filter((plate) => plate.category === "Sobremesa"))
       setDrinks(response.data.filter((plate) => plate.category === "Bebida"))
     }
-    
-
     fetchPlates();
   }, [varSearch, ]);
 
@@ -88,6 +99,7 @@ export function Home() {
               {
                 meals.map(plate => (
                   <Plate
+                    receivedOrderToCart={receivedOrderToCart}
                     key={String(plate.id)}
                     data={plate}
                   />
@@ -108,6 +120,7 @@ export function Home() {
               {
                 desserts.map(plate => (
                   <Plate
+                    receivedOrderToCart={receivedOrderToCart}
                     key={String(plate.id)}
                     data={plate}
                   />
@@ -127,6 +140,7 @@ export function Home() {
               {
                 drinks.map(plate => (
                   <Plate
+                    receivedOrderToCart={receivedOrderToCart}
                     key={String(plate.id)}
                     data={plate}
                   />
@@ -135,7 +149,6 @@ export function Home() {
             </Swiper>
 
           </Section>
-
 
         </Main>
 

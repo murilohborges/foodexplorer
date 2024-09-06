@@ -6,9 +6,9 @@ import { api } from '../../services/api';
 import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export function Plate({ data, ...rest }){
+export function Plate({ data, receivedOrderToCart, ...rest }){
   const PlateTitle = `${data.title} >`;
   const PlatePriceFixed = Number(data.price).toFixed(2).replace(".",",");
   const PlatePrice = `R$ ${PlatePriceFixed}`;
@@ -17,12 +17,11 @@ export function Plate({ data, ...rest }){
   const { user } = useAuth();
   const navigate = useNavigate();
   const avatarUrl = data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : plateIcon;
-  const [numberOrders, setNumberOrders] = useState(Number('0'));
+  const [numberOrders, setNumberOrders] = useState(Number('1'));
   
 
   function handleDetails(id){
-    const plateId = `${data.id}`;
-    id = plateId;
+    id = PlateId;
     navigate(`/details/${id}`);
   }
 
@@ -35,11 +34,36 @@ export function Plate({ data, ...rest }){
   }
 
   function handleDecrease(){
-    if(numberOrders <= 0){
-      setNumberOrders(0);
+    if(numberOrders <= 1){
+      setNumberOrders(1);
       return
     } else {
       setNumberOrders(numberOrders - 1);
+    }
+  }
+
+  async function handleAddToCart(id, amount){
+    const confirm = window.confirm("Você quer mesmo adicionar o prato e essa quantidade no carrinho?")
+    if(confirm){
+      id = Number(PlateId);
+      amount = numberOrders;
+      const response = await api.get(`plates/${id}`);
+      if(amount == 0){
+        return alert("Não é possível incluir um número zero de prato no carrinho")
+      }
+      const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
+      const numberElementsCart = cart == null ? 0 : cart.length;
+      let order = {
+        order_id: numberElementsCart + 1,
+        plate_id: id,
+        plate_amount: amount,
+        plate_title: response.data[0].title,
+        plate_avatar: response.data[0].avatar,
+        user_id: user.id
+      }
+      console.log(order)
+      receivedOrderToCart(order);
+      location.reload()
     }
   }
 
@@ -108,7 +132,7 @@ export function Plate({ data, ...rest }){
               </button>
             </ControlNumberPlates>
 
-            <button className='include-button'>Incluir</button>
+            <button className='include-button' onClick={handleAddToCart}>Incluir</button>
           </> 
         }
         

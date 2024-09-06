@@ -166,10 +166,11 @@ export const ButtonNewPlate = styled(Link)`
   }
 `;
 
-export const ButtonOrders = styled(Link)`
+export const ButtonOrders = styled.div`
   width: 13.5rem;
   background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  cursor: pointer;
   
   height: 3rem;
   border: 0;
@@ -180,10 +181,6 @@ export const ButtonOrders = styled(Link)`
   font-weight: 400;
   font-size: 0.875rem;
   font-family: "Poppins", sans-serif;
-
-  &:disabled {
-    opacity: 0.5;
-  }
 
   display: none;
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}) {

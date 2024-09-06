@@ -36,14 +36,6 @@ export const Container = styled.div`
     width: 19.125rem;
   }
 
-  @media(min-width: 900px){
-    width: 16.5rem;
-  }
-
-  @media(min-width: 1000px){
-    width: 19.125rem;
-  }
-
   > svg {
     position: absolute;
     top: 1rem;

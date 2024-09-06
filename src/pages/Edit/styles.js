@@ -34,6 +34,7 @@ export const BackButton = styled(Link)`
   font-size: 1rem;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
+  margin-top: 2.5rem;
 
   > svg {
     width: 0.5rem;
@@ -41,7 +42,6 @@ export const BackButton = styled(Link)`
   }
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-    margin-top: 2.5rem;
     font-size: 1.5rem;
     font-weight: bold;
     > svg {

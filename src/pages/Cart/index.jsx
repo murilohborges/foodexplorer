@@ -1,4 +1,4 @@
-import { Container, FixedContent, Main, BackButton, List, NoFavourites } from "./styles.js";
+import { Container, FixedContent, Main, BackButton, List, EmptyCart } from "./styles.js";
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
@@ -6,15 +6,17 @@ import { useState, useEffect } from "react";
 import plateIcon from '../../assets/plateIcon.png';
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
-import { FavPlate } from "../../components/FavPlate/index.jsx";
+import { CartPlate } from "../../components/CartPlate/index.jsx";
 import { useAuth } from "../../hooks/auth.jsx";
 
-export function Favourites() {
+export function Cart() {
   const [varSearch, setVarSearch] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [favPlates, setFavPlates] = useState([]);
+  const [cartPlates, setCartPlates] = useState([]);
+  let oldCartPlates = [];
+  const [platesSearched, setPlatesSearched] = useState([]);
   const navigate = useNavigate();
-  const numberfavs = favPlates.length;
+  const numbercart = cartPlates === null ? 0 : cartPlates.length;
   const { user } = useAuth();
 
   function handleBack(){
@@ -34,13 +36,8 @@ export function Favourites() {
   }
 
   useEffect(() => {
-    async function fetchPlates(){
-      const response = await api.get(`/favourites?title=${varSearch}`);
-      const responsePlates = response.data
-      setFavPlates(responsePlates)
-    }
-    fetchPlates();
-  }, [varSearch, ]);
+    setCartPlates(JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`)));
+  }, []);
 
   return(
     <Container $menuIsOpen={menuIsOpen}>
@@ -64,10 +61,10 @@ export function Favourites() {
             Voltar
           </BackButton>
 
-          <h1>Meus favoritos</h1>
+          <h1>Carrinho</h1>
 
-          <List $numberfavs={numberfavs}>
-            <NoFavourites $numberfavs={numberfavs}>
+          <List $numbercart={numbercart}>
+            <EmptyCart $numbercart={numbercart}>
               <svg width="86" height="104" viewBox="0 0 86 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0004 0.000624651C24.2095 0.000624651 26.0003 1.79147 26.0003 4.0006V24.0005C26.0003 26.2096 24.2095 28.0005 22.0004 28.0005C19.7912 28.0005 18.0004 26.2096 18.0004 24.0005V4.0006C18.0004 1.79147 19.7912 0.000624651 22.0004 0.000624651Z" fill="#7C7C8A"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0004 42.0004C24.2095 42.0004 26.0003 43.7912 26.0003 46.0003V100C26.0003 102.209 24.2095 104 22.0004 104C19.7912 104 18.0004 102.209 18.0004 100V46.0003C18.0004 43.7912 19.7912 42.0004 22.0004 42.0004Z" fill="#7C7C8A"/>
@@ -75,12 +72,13 @@ export function Favourites() {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M84.2948 0.72435C85.3635 1.47293 86 2.69576 86 4.0006V100C86 102.209 84.2091 104 82 104C79.7909 104 78 102.209 78 100V72.0002H54.0002C52.8651 72.0002 51.7835 71.518 51.0249 70.6737C50.2663 69.8295 49.902 68.7027 50.023 67.5741L54.0002 68.0002C50.023 67.5741 50.0228 67.5752 50.023 67.5741L50.0247 67.558L50.0287 67.5217L50.0435 67.3893C50.0564 67.2749 50.0756 67.1088 50.1013 66.8941C50.1527 66.4647 50.2302 65.8407 50.3363 65.0477C50.5485 63.4622 50.8755 61.1983 51.3371 58.4602C52.2588 52.9936 53.7249 45.5926 55.9016 37.91C58.0699 30.2573 60.9889 22.1595 64.874 15.3855C68.7082 8.70031 73.8167 2.72011 80.633 0.241449C81.8593 -0.204471 83.226 -0.0242337 84.2948 0.72435ZM58.5616 64.0002H78V11.2033C75.8233 13.235 73.7542 15.982 71.8136 19.3656C68.3863 25.3415 65.6803 32.7436 63.5986 40.0908C61.5254 47.4081 60.1165 54.507 59.2257 59.7903C58.9584 61.3758 58.7384 62.7937 58.5616 64.0002Z" fill="#7C7C8A"/>
               </svg>
 
-              <h1>Ainda não há pratos favoritos...</h1>
-            </NoFavourites>
+              <h1>Ainda não há pratos no carrinho...</h1>
+            </EmptyCart>
 
             {
-              favPlates.map(plate => (
-                <FavPlate
+              cartPlates &&
+              cartPlates.map(plate => (
+                <CartPlate
                   key={String(plate.id)}
                   data={plate}
                 />

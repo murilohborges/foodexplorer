@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { USER_ROLE } from '../../utils/roles.js'
 
-export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
+export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch}) {
   const { signOut } = useAuth();
   const { user } = useAuth();
   const [search, setSearch] = useState("");
   const navigation = useNavigate();
+  const [numberCart, setNumberCart] = useState()
 
   function handleSignOut() {
     navigation("/");
@@ -26,6 +27,14 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
   useEffect(() => {
     receivedSearch(search);
   }, [search])
+
+  useEffect(() => {
+    let cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
+    if(cart == null){
+      cart = []
+    }
+    setNumberCart(cart.length)
+  }, [])
 
   return (
     <Container data-menu-is-open={menuIsOpen}>
@@ -55,6 +64,13 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch }) {
           [USER_ROLE.ADMIN].includes(user.role) && 
           <>
             <ButtonMenu to="/new">Novo Prato</ButtonMenu>
+          </> 
+        }
+
+        {
+          [USER_ROLE.CUSTOMER].includes(user.role) && 
+          <>
+            <ButtonMenu to="/cart">Carrinho ({numberCart})</ButtonMenu>
           </> 
         }
 

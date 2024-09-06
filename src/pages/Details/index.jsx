@@ -17,10 +17,11 @@ import plateIcon from '../../assets/plateIcon.png'
 export function Details() {
   const [data, setData] = useState(null);
   const [avatar, setAvatar] = useState(plateIcon);
+  const [price, setPrice] = useState();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const avatarUrl = avatar ? `${api.defaults.baseURL}/files/${avatar}` : plateIcon;
   const { user } = useAuth();
-  const [numberOrders, setNumberOrders] = useState(Number('0'));
+  const [numberOrders, setNumberOrders] = useState(Number('1'));
 
   const params = useParams();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export function Details() {
       const response = await api.get(`/plates/${params.id}`);
       setData(response.data);
       setAvatar(response.data[0].avatar)
-      
+      setPrice(Number(response.data[0].price))
     }
 
     fetchPlate();
@@ -61,8 +62,8 @@ export function Details() {
   }
 
   function handleDecrease(){
-    if(numberOrders <= 0){
-      setNumberOrders(0);
+    if(numberOrders <= 1){
+      setNumberOrders(1);
       return
     } else {
       setNumberOrders(numberOrders - 1);
@@ -76,6 +77,37 @@ export function Details() {
       navigate('/')
     }catch(e){
       alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
+    }
+  }
+
+  async function handleAddToCart(){
+    const confirm = window.confirm("Você quer mesmo adicionar o prato e essa quantidade no carrinho?")
+    if(confirm){
+      let id = Number(params.id);
+      let amount = numberOrders;
+      const response = await api.get(`plates/${params.id}`);
+      if(amount == 0){
+        return alert("Não é possível incluir um número zero de prato no carrinho")
+      }
+      const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
+      const numberElementsCart = cart == null ? 0 : cart.length;
+      var order = {
+        order_id: numberElementsCart + 1,
+        plate_id: id,
+        plate_amount: amount,
+        plate_title: response.data[0].title,
+        plate_avatar: response.data[0].avatar,
+        user_id: user.id
+      }
+    }
+    const cartVerify = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
+    if(cartVerify === null){
+      cartUser.push(order);
+      localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartUser));
+    }else{
+      const cartUser = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
+      cartUser.push(order);
+      localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartUser));
     }
   }
 
@@ -161,29 +193,23 @@ export function Details() {
                       </svg>
                     </button>
 
-                    <button className='include-button'>
+                    <button className='include-button'onClick={handleAddToCart}>
                       <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.72549 5.47185C3.72549 5.09848 4.02816 4.79581 4.40152 4.79581H13.1899C13.5633 4.79581 13.866 5.09848 13.866 5.47185C13.866 5.84521 13.5633 6.14788 13.1899 6.14788H4.40152C4.02816 6.14788 3.72549 5.84521 3.72549 5.47185Z" fill="white"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.72549 8.17597C3.72549 7.80261 4.02816 7.49994 4.40152 7.49994H13.1899C13.5633 7.49994 13.866 7.80261 13.866 8.17597C13.866 8.54933 13.5633 8.852 13.1899 8.852H4.40152C4.02816 8.852 3.72549 8.54933 3.72549 8.17597Z" fill="white"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.403334 0.459608C0.656894 0.206048 1.0008 0.0635986 1.35939 0.0635986H16.2321C16.5907 0.0635986 16.9346 0.206048 17.1881 0.459608C17.4417 0.71317 17.5841 1.05707 17.5841 1.41566V14.2602C17.5841 14.4945 17.4628 14.7121 17.2635 14.8353C17.0642 14.9585 16.8153 14.9697 16.6058 14.8649L14.204 13.664L11.8022 14.8649C11.6119 14.9601 11.3878 14.9601 11.1975 14.8649L8.79572 13.664L6.39393 14.8649C6.20361 14.9601 5.97959 14.9601 5.78927 14.8649L3.38748 13.664L0.985685 14.8649C0.776124 14.9697 0.52725 14.9585 0.327945 14.8353C0.12864 14.7121 0.00732422 14.4945 0.00732422 14.2602V1.41566C0.00732422 1.05707 0.149774 0.713169 0.403334 0.459608ZM16.2321 1.41566L1.35939 1.41566L1.35939 13.1664L3.08515 12.3035C3.27547 12.2084 3.49949 12.2084 3.68981 12.3035L6.0916 13.5044L8.49339 12.3035C8.68372 12.2084 8.90773 12.2084 9.09805 12.3035L11.4998 13.5044L13.9016 12.3035C14.092 12.2084 14.316 12.2084 14.5063 12.3035L16.2321 13.1664V1.41566Z" fill="white"/>
                       </svg>
-                      pedir ∙ R$ 25,00
+                      pedir ∙ R$ {price.toFixed(2).replace(".",",")}
                     </button>
                 
                   </ControlNumberPlates>
                 </> 
               }
-            
 
             </TextInfo>
-
-  
             
           </PlateInfo>
         }
-
-        
-
 
       </Main>
       
