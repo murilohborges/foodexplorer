@@ -82,7 +82,7 @@ export const List = styled.div`
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "grid"};
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
   }
 `;
 

@@ -13,8 +13,6 @@ export function Cart() {
   const [varSearch, setVarSearch] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [cartPlates, setCartPlates] = useState([]);
-  let oldCartPlates = [];
-  const [platesSearched, setPlatesSearched] = useState([]);
   const navigate = useNavigate();
   const numbercart = cartPlates === null ? 0 : cartPlates.length;
   const { user } = useAuth();
@@ -37,6 +35,7 @@ export function Cart() {
 
   useEffect(() => {
     setCartPlates(JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`)));
+    console.log(cartPlates)
   }, []);
 
   return(
@@ -79,7 +78,7 @@ export function Cart() {
               cartPlates &&
               cartPlates.map(plate => (
                 <CartPlate
-                  key={String(plate.id)}
+                  key={String(plate.order_id)}
                   data={plate}
                 />
               ))
