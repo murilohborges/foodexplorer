@@ -15,22 +15,21 @@ export function PanelButton(){
     navigation("/favourites");
   }
 
+  function handleToOrders(){
+    navigation("/orders");
+  }
+
   return (
     <Container>
       <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
+
+      <ButtonHeader onClick={handleToOrders}>Histórico de pedidos</ButtonHeader>
       {
         [USER_ROLE.ADMIN].includes(user.role) && 
         <>
           <ButtonHeader onClick={handleNewPlate}>Novo prato</ButtonHeader>
         </> 
       }
-      {
-        [USER_ROLE.CUSTOMER].includes(user.role) && 
-        <>
-          <ButtonHeader >Histórico de pedidos</ButtonHeader>
-        </> 
-      }
-      
     </Container>
   )
 }

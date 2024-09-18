@@ -4,6 +4,7 @@ import { Home } from '../pages/Home';
 import { Details } from '../pages/Details';
 import { Favourites } from '../pages/Favourites';
 import { Cart } from '../pages/Cart';
+import { Orders } from '../pages/Orders';
 
 export function CustomerRoutes() {
   return (
@@ -12,6 +13,7 @@ export function CustomerRoutes() {
       <Route path="/details/:id" element={<Details />} />
       <Route path="/favourites" element={<Favourites />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/orders" element={<Orders />} />
 
       <Route path="*" element={<Navigate to='/'/>} />
     </Routes>

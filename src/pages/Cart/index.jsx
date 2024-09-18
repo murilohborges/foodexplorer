@@ -2,6 +2,7 @@ import { Container, FixedContent, Main, BackButton, List, EmptyCart } from "./st
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
+import { Button } from "../../components/Button/index.jsx";
 import { useState, useEffect } from "react";
 import plateIcon from '../../assets/plateIcon.png';
 import { useParams, useNavigate } from "react-router-dom";
@@ -85,6 +86,10 @@ export function Cart() {
             }
 
           </List>
+          
+          <div className="wrapper-next-button">
+            <Button title={'Avançar'}/>
+          </div>
 
         </Main>
 

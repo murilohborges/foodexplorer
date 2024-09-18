@@ -25,6 +25,10 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
     navigation("/cart");
   }
 
+  function handleToOrders(){
+    navigation("/orders");
+  }
+
   useEffect(() => {
     receivedSearch(search);
   }, [search])
@@ -91,7 +95,7 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
         {
           [USER_ROLE.ADMIN].includes(user.role) && 
           <>
-            <ButtonOrders to="/">
+            <ButtonOrders onClick={handleToOrders}>
               <svg width="27" height="22" viewBox="0 0 27 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.53906 8C5.53906 7.44772 5.98678 7 6.53906 7H19.5391C20.0913 7 20.5391 7.44772 20.5391 8C20.5391 8.55229 20.0913 9 19.5391 9H6.53906C5.98678 9 5.53906 8.55229 5.53906 8Z" fill="white"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.53906 12C5.53906 11.4477 5.98678 11 6.53906 11H19.5391C20.0913 11 20.5391 11.4477 20.5391 12C20.5391 12.5523 20.0913 13 19.5391 13H6.53906C5.98678 13 5.53906 12.5523 5.53906 12Z" fill="white"/>

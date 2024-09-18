@@ -28,8 +28,11 @@ export const FixedContent = styled.section`
 `;
 
 export const Main = styled.div`
-  margin: 2rem 6rem 3.4rem;
+  margin: 2rem 3rem 3.4rem;
   height: auto;
+  @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+    margin: 2rem 6rem 3.4rem;
+  }
 
   > h1 {
     font-size: 2rem;
@@ -38,10 +41,16 @@ export const Main = styled.div`
     color: ${({ theme}) => theme.COLORS.LIGHT_300};
     margin-top: 2rem;
     margin-bottom: 2rem;
-    grid-area: title;
 
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
       font-size: 2rem;
+    }
+  }
+
+  > .wrapper-next-button{
+    width: 50%;
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      width: 25%;
     }
   }
 `;
@@ -78,7 +87,6 @@ export const List = styled.div`
   min-height: 19rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5rem;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
     display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "grid"};
