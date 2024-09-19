@@ -23,7 +23,13 @@ export function PanelButton(){
     <Container>
       <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
 
-      <ButtonHeader onClick={handleToOrders}>Histórico de pedidos</ButtonHeader>
+      {
+        [USER_ROLE.CUSTOMER].includes(user.role) && 
+        <>
+          <ButtonHeader onClick={handleToOrders}>Histórico de pedidos</ButtonHeader>
+        </> 
+      }
+
       {
         [USER_ROLE.ADMIN].includes(user.role) && 
         <>

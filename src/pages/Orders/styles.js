@@ -87,13 +87,15 @@ export const List = styled.div`
     border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
     border-top-left-radius: 0.7rem;
     border-top-right-radius: 0.7rem;
+    @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
+      display: none;
+    }
   }
 
   table {
     margin: auto;
     width: 100%;
     border-collapse: collapse;
-    
   }
 
   table thead {
