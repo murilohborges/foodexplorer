@@ -48,6 +48,7 @@ export const Main = styled.div`
   }
 
   > .wrapper-next-button{
+    margin-top: 2rem;
     width: 50%;
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
       width: 25%;
@@ -89,7 +90,7 @@ export const List = styled.div`
   flex-direction: column;
 
   @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-    display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "grid"};
+    display: ${({ $numbercart }) => $numbercart == 0 ? "flex" : "grid"};
     grid-template-columns: auto auto;
   }
 `;
@@ -97,7 +98,7 @@ export const List = styled.div`
 export const EmptyCart = styled.div`
   display: ${({ $numbercart }) => $numbercart != 0 ? "none" : "flex"};
   flex-direction: column;
-  gap: 5rem;
+  gap: 2rem;
   align-items: center;
   border: 1px solid ${({ theme}) => theme.COLORS.LIGHT_500};
   border-radius: 0.5rem;

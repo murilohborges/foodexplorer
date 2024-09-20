@@ -29,10 +29,13 @@ export const FixedContent = styled.section`
 
 export const Main = styled.div`
   margin: 2rem 6rem 3.4rem;
-  height: auto;
+  min-height: 25rem;
+  @media(max-width: 425px){
+    margin: 2rem 2rem 3.4rem;
+  }
 
   > h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     font-family: "Poppins", sans-serif;
     color: ${({ theme}) => theme.COLORS.LIGHT_300};
@@ -44,6 +47,14 @@ export const Main = styled.div`
       font-size: 2rem;
     }
   }
+
+  > .wrapper-save-button{
+    width: 50%;
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      width: 25%;
+    }
+  }
+
 `;
 
 export const BackButton = styled(Link)`
@@ -75,14 +86,14 @@ export const BackButton = styled(Link)`
 
 export const List = styled.div`
   width: 100%;
-  min-height: 19rem;
+  min-height: 18rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5rem;
 
   > .wrapper-table {
     padding: 0;
     width: 100%;
+    height: fit-content;
     overflow: hidden;
     border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
     border-top-left-radius: 0.7rem;
@@ -90,6 +101,11 @@ export const List = styled.div`
     @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
       display: none;
     }
+  }
+
+  > .wrapper-no-orders {
+    margin-bottom: 8rem;
+    width: 100%;
   }
 
   table {
@@ -110,24 +126,26 @@ export const List = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
   }
 
-  @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-    display: ${({ $numberfavs }) => $numberfavs == 0 ? "flex" : "grid"};
-    grid-template-columns: auto auto auto;
+  .wrapper-order-items {
+    display: none;
+
+    @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
+      display: block;
+    }
   }
 `;
 
 export const NoOrders = styled.div`
-  display: ${({ $numberfavs }) => $numberfavs != 0 ? "none" : "flex"};
+  /* display: ${({ $ordersNumber }) => $ordersNumber != 0 ? "none" : "flex"}; */
+  display: flex;
   flex-direction: column;
-  gap: 5rem;
   align-items: center;
+  gap: 2rem;
   border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_500};
   border-radius: 0.5rem;
   width: 100%;
   padding: 4rem;
 
   font-family: "Poppins", sans-serif;
-  color: ${({ theme}) => theme.COLORS.LIGHT_500};
-
-  
+  color: ${({ theme }) => theme.COLORS.LIGHT_500};
 `
