@@ -36,7 +36,6 @@ export function Cart() {
 
   useEffect(() => {
     setCartPlates(JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`)));
-    console.log(cartPlates)
   }, []);
 
   return(
