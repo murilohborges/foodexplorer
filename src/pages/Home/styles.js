@@ -4,27 +4,20 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.div`
   width: 100%;
+  min-height: 100vh;
   position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   overflow-x: hidden;
   display: grid; 
   grid-template-columns: auto; 
-  grid-template-rows: AUTO auto; 
-  grid-template-areas: 
-    "top"
-    "main";
+  grid-template-rows: auto auto auto;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     grid-template-columns: auto;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-    "top"
-    "main";
+    grid-template-rows: auto 1fr auto auto;
   }
-  
 `;
 
 export const FixedContent = styled.section`
-  grid-area: "main";
 `;
 
 export const Title = styled.div`

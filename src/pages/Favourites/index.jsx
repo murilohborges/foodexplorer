@@ -91,8 +91,9 @@ export function Favourites() {
 
         </Main>
 
-        <Footer/>
       </FixedContent>
+      
+      <Footer/>
         
     </Container>
   )

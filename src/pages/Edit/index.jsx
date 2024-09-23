@@ -260,9 +260,9 @@ export function Edit() {
 
         </Main>
 
-        
-        <Footer/>
       </FixedContent>
+      
+      <Footer/>
         
     </Container>
   )

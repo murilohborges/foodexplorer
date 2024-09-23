@@ -152,9 +152,10 @@ export function Home() {
 
         </Main>
 
-        <Footer/>
         
       </FixedContent>      
+      
+      <Footer/>
         
     </Container>
   )

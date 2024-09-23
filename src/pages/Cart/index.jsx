@@ -92,8 +92,9 @@ export function Cart() {
 
         </Main>
 
-        <Footer/>
       </FixedContent>
+      
+      <Footer/>
         
     </Container>
   )

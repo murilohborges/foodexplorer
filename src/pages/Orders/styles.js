@@ -7,18 +7,12 @@ export const Container = styled.div`
   width: 100%;
   position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   display: grid; 
-  grid-template-columns: 100%; 
-  grid-template-rows: 7.125rem auto; 
-  grid-template-areas: 
-    "top"
-    "main";
+  grid-template-columns: auto; 
+  grid-template-rows: auto auto auto;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    grid-template-columns: 100%;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-    "top"
-    "main";
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto auto;
   }
 `;
 

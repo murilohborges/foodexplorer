@@ -256,9 +256,9 @@ export function New() {
         </Main>
 
         
-        <Footer/>
       </FixedContent>
         
+      <Footer/>
     </Container>
   )
 }

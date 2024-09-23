@@ -144,8 +144,9 @@ export function Orders() {
 
         </Main>
 
-        <Footer/>
       </FixedContent>
+      
+      <Footer/>
         
     </Container>
   )

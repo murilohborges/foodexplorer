@@ -20,10 +20,6 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch}) {
     onCloseMenu(false)
   }
 
-  function handleToFavourites(){
-    navigation("/favourites");
-  }
-
   useEffect(() => {
     receivedSearch(search);
   }, [search])
