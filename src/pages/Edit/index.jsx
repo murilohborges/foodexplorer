@@ -167,6 +167,10 @@ export function Edit() {
                       type="file"
                       onChange={handleChangeAvatar}
                     />
+                    
+                    <div className="preview-img">
+                      <img src={avatar} alt="foto do prato"/>
+                    </div>
                   </label>
                   
                 </Avatar>

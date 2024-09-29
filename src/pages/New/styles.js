@@ -240,13 +240,13 @@ export const Row = styled.div`
 
     &:nth-child(2) {
       .wrapper-input:nth-child(1){
-        width: 20%;
+        width: 30%;
       }
       .wrapper-input:nth-child(2){
         width: 45%;
       }
       .wrapper-input:nth-child(3){
-        width: 35%;
+        width: 25%;
       }
     }
 
@@ -284,7 +284,8 @@ export const Avatar = styled.div`
   .file-label{
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 1rem;
 
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
@@ -303,7 +304,10 @@ export const Avatar = styled.div`
       justify-content: center;
     }
 
-    > p {
+    > p, .preview-img {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
       font-size: 0.875rem;
       font-weight: 500;
       font-family: "Poppins", sans-serif;
@@ -312,7 +316,15 @@ export const Avatar = styled.div`
     > input {
       display: none;
     }
+
+    >.preview-img img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+    }
+    
   }
+  
 
   
 `;

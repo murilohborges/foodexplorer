@@ -47,6 +47,9 @@ export const BackButton = styled(Link)`
 
 export const Main = styled.div`
   margin: 0.75rem 6rem 3.4rem;
+  @media(max-width: 400px){
+    margin: 0.75rem 2.5rem 3.4rem;
+  }
 `;
 
 export const Form = styled.div`
@@ -62,10 +65,6 @@ export const Form = styled.div`
     color: ${({ theme}) => theme.COLORS.LIGHT_300};
     margin-top: 2rem;
     grid-area: title;
-
-    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-      font-size: 2rem;
-    }
   }
 
   .wrapper-input {
@@ -244,13 +243,13 @@ export const Row = styled.div`
 
     &:nth-child(2) {
       .wrapper-input:nth-child(1){
-        width: 25%;
+        width: 35%;
       }
       .wrapper-input:nth-child(2){
         width: 45%;
       }
       .wrapper-input:nth-child(3){
-        width: 30%;
+        width: 20%;
       }
     }
 
@@ -271,16 +270,17 @@ export const Row = styled.div`
 
 export const SaveButton = styled.button`
   width: 100%;
+  height: 3rem;
+  justify-content: center;
 
   background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
   border: 0;
-
-  padding: 0.75rem 0;
   border-radius: 5px;
 
   font-size: 0.875rem;
   font-family: "Poppins", sans-serif;
+
 `;
 
 export const DeleteButton = styled.button`
@@ -317,7 +317,8 @@ export const Avatar = styled.div`
   .file-label{
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 1rem;
 
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
@@ -336,21 +337,31 @@ export const Avatar = styled.div`
       padding-right: 1rem;
       justify-content: center;
     }
+    @media(max-width: 400px){
+      padding-left: 1rem;
+    }
 
     > p {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
       font-size: 0.875rem;
       font-weight: 500;
       font-family: "Poppins", sans-serif;
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
-      @media(min-width: ${DEVICE_BREAKPOINTS.XS}){
-        padding-right: 1rem;
-      }
       @media(min-width: ${DEVICE_BREAKPOINTS.LG}){
         padding-right: 0rem;
       }
     }
     > input {
       display: none;
+    }
+
+    >.preview-img img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      margin-right: 1rem;
     }
   }
 

@@ -32,6 +32,7 @@ export function New() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const navigate = useNavigate();
+  var nameFile = '';
 
   function handleBack(){
     navigate(-1)
@@ -99,7 +100,9 @@ export function New() {
   async function handleChangeAvatar(event){
     const file = event.target.files[0];
     setAvatarFile(file);
-
+    nameFile = String(file.name);
+    console.log(nameFile)
+    
     const imagePreview = URL.createObjectURL(file);
     setAvatar(imagePreview);
   }
@@ -164,6 +167,10 @@ export function New() {
                       type="file"
                       onChange={handleChangeAvatar}
                     />
+
+                    <div className="preview-img">
+                      <img src={avatar} alt="foto do prato"/>
+                    </div>
                   </label>
                   
                 </Avatar>
