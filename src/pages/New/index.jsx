@@ -79,8 +79,6 @@ export function New() {
         const fileUploadForm = new FormData();
         fileUploadForm.append("avatar", avatarFile);
 
-        
-  
         const response = await api.patch(`/plates/avatar/${newPlateId}`, fileUploadForm);
       }
     }catch(error) {
@@ -101,7 +99,6 @@ export function New() {
     const file = event.target.files[0];
     setAvatarFile(file);
     nameFile = String(file.name);
-    console.log(nameFile)
     
     const imagePreview = URL.createObjectURL(file);
     setAvatar(imagePreview);

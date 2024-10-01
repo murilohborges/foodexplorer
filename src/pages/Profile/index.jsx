@@ -14,59 +14,26 @@ export function Profile() {
   const { user } = useAuth();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  var nameFile = '';
-
   function handleBack(){
     navigate(-1)
   }
 
-  async function handleNewPlate(){
-    if (!title) {
-      return alert("Digite o título do prato");
-    }
+  async function handleUpdateProfile(){
 
-    if (!price) {
-      return alert("Digite o preço do prato");
-    }
-
-    if (!description) {
-      return alert("Digite a descrição do prato");
-    }
-
-    if (newIngredient) {
-      return alert("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
-    }
-
-    const response = await api.post("/plates", {
-      title,
-      category,
-      ingredients,
-      price,
-      description
+    const response = await api.put("/users", {
+      name: newName,
+      email: newEmail,
+      password: password,
+      old_password: oldPassword
     });
-
-    const newPlateId = response.data.plate_id;
-
-    try {
-      if(avatarFile) {
-        const fileUploadForm = new FormData();
-        fileUploadForm.append("avatar", avatarFile);
-
-        
-  
-        const response = await api.patch(`/plates/avatar/${newPlateId}`, fileUploadForm);
-      }
-    }catch(error) {
-      if(error.response) {
-        alert(error.response.data.message);
-      }else{
-        alert("Não foi possível atualizar.")
-      }
-    }
     
-    alert("Prato criado com sucesso");
+    alert("Perfil atualizado com sucesso");
     navigate(-1);
   }
 
@@ -115,7 +82,7 @@ export function Profile() {
                 <Input
                   type="text" 
                   placeholder="Digite seu novo nome"
-                  onChange={e => setName(e.target.value)}
+                  onChange={e => setNewName(e.target.value)}
                 />
               </div>
             </Row>
@@ -126,7 +93,7 @@ export function Profile() {
                 <Input
                   type="email" 
                   placeholder="Digite seu novo email"
-                  onChange={e => setName(e.target.value)}
+                  onChange={e => setNewEmail(e.target.value)}
                 />
               </div>
             </Row>
@@ -137,7 +104,7 @@ export function Profile() {
                 <Input
                   type="password" 
                   placeholder="No mínimo 6 caracteres"
-                  onChange={e => setName(e.target.value)}
+                  onChange={e => setOldPassword(e.target.value)}
                 />
               </div>
             </Row>
@@ -148,12 +115,12 @@ export function Profile() {
                 <Input
                   type="password" 
                   placeholder="No mínimo 6 caracteres"
-                  onChange={e => setName(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </div>
             </Row>
 
-            <Row className="row-five" onClick={handleNewPlate}>
+            <Row className="row-five" onClick={handleUpdateProfile}>
               <SaveButton >Salvar alterações</SaveButton>
             </Row>
           </Form>
