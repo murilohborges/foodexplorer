@@ -6,6 +6,7 @@ import { Edit } from '../pages/Edit';
 import { New } from '../pages/New';
 import { Favourites } from '../pages/Favourites';
 import { Orders } from '../pages/Orders';
+import { Profile } from '../pages/Profile';
 
 export function AdminRoutes() {
   return (
@@ -15,6 +16,7 @@ export function AdminRoutes() {
       <Route path="/edit/:id" element={<Edit />} />
       <Route path="/new" element={<New />} />
       <Route path="/favourites" element={<Favourites />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/orders" element={<Orders />} />
 
       <Route path="*" element={<Navigate to='/'/>}/>
