@@ -15,12 +15,18 @@ export function PanelButton(){
     navigation("/favourites");
   }
 
+  function handleToProfile(){
+    navigation("/profile");
+  }
+
   function handleToOrders(){
     navigation("/orders");
   }
 
   return (
     <Container>
+      <ButtonHeader onClick={handleToProfile}>Meu perfil</ButtonHeader>
+
       <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
 
       {

@@ -56,6 +56,8 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch}) {
           />
         </InputSearchMenu>
 
+        <ButtonMenu to="/profile">Meu perfil</ButtonMenu>
+
         {
           [USER_ROLE.ADMIN].includes(user.role) && 
           <>
