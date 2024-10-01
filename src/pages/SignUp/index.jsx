@@ -47,7 +47,8 @@ export function SignUp() {
 
         <div className="wrapper-input">
           <label>Seu nome</label>
-          <Input 
+          <Input
+            type="text"
             placeholder="Exemplo: Maria da Silva"
             onChange={e => setName(e.target.value)}
           />
