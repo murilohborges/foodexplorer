@@ -25,23 +25,28 @@ export function PanelButton(){
 
   return (
     <Container>
-      <ButtonHeader onClick={handleToProfile}>Meu perfil</ButtonHeader>
+      <h2>Bem vindo(a) {user.name}</h2>
 
-      <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
+      <div className="wrapper-buttons">
+        <ButtonHeader onClick={handleToProfile}>Meu perfil</ButtonHeader>
 
-      {
-        [USER_ROLE.CUSTOMER].includes(user.role) && 
-        <>
-          <ButtonHeader onClick={handleToOrders}>Histórico de pedidos</ButtonHeader>
-        </> 
-      }
+        <ButtonHeader onClick={handleToFavourites}>Meus Favoritos</ButtonHeader>
 
-      {
-        [USER_ROLE.ADMIN].includes(user.role) && 
-        <>
-          <ButtonHeader onClick={handleNewPlate}>Novo prato</ButtonHeader>
-        </> 
-      }
+        {
+          [USER_ROLE.CUSTOMER].includes(user.role) && 
+          <>
+            <ButtonHeader onClick={handleToOrders}>Histórico de pedidos</ButtonHeader>
+          </> 
+        }
+
+        {
+          [USER_ROLE.ADMIN].includes(user.role) && 
+          <>
+            <ButtonHeader onClick={handleNewPlate}>Novo prato</ButtonHeader>
+          </> 
+        }
+      </div>
+      
     </Container>
   )
 }
