@@ -8,7 +8,7 @@ export const Container = styled.section`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 15rem;
+  gap: 10rem;
 
   font-family: "Roboto", sans-serif;
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
@@ -27,7 +27,7 @@ export const Container = styled.section`
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 4rem;
+    gap: 3rem;
   }
 
 `;
