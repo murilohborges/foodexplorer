@@ -28,6 +28,9 @@ export function Cart() {
   }
 
   async function handleAdvanceToPayment(){
+    if(cartPlates.length == 0){
+      return alert("O carrinho está vazio. Adicione pratos para avançar para o pagamento!")
+    }
     let itemsUser = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
     const response = await api.post("/stripe", { itemsUser });
     if(response.status !== 200) {
@@ -93,7 +96,7 @@ export function Cart() {
           </List>
           
           <div className="wrapper-next-button">
-            <Button title={'Avançar'} onClick={handleAdvanceToPayment}/>
+            <Button title={'Ir para o pagamento'} onClick={handleAdvanceToPayment}/>
           </div>
 
         </Main>

@@ -45,9 +45,9 @@ export const Main = styled.div`
 
   > .wrapper-next-button{
     margin-top: 2rem;
-    width: 50%;
+    width: 100%;
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
-      width: 25%;
+      width: 40%;
     }
   }
 `;
