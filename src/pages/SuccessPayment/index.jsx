@@ -8,6 +8,7 @@ import { api } from "../../services/api.js";
 import { useAuth } from "../../hooks/auth.jsx";
 
 export function SuccessPayment() {
+  const [varSearch, setVarSearch] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
