@@ -15,15 +15,12 @@ import { USER_ROLE } from '../../utils/roles.js';
 
 export function Orders() {
   const [varSearch, setVarSearch] = useState("");
+  const [statusOrder, setStatusOrder] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
   const ordersNumber = orders.length;
   const { user } = useAuth();
-
-  function handleBack(){
-    navigate(-1)
-  }
 
   async function receivedSearch(search){
     setVarSearch(search);
@@ -36,6 +33,53 @@ export function Orders() {
   async function onCloseMenu(){
     setMenuIsOpen(false);
   }
+
+  function handleSelectChanges(id, field, value){
+    setOrders(prevData =>
+      prevData.map(row => 
+        row.id === id ? {...row, [field]: value } : row
+      )
+    )
+  }
+
+  async function handleUpdateOrders(){
+    
+    const response = await api.put(`/orders`, { orders });
+  }
+
+  function translateOrderStatus(status){
+    switch(status) {
+      case 'pending':
+        return 'Pendente'
+      case 'preparing':
+        return 'Preparando'
+      case 'delivered':
+        return 'Entregue'
+      default:
+        return 'Pendente'
+    }
+  }
+
+  function colorOrderStatus(status){
+    switch(status) {
+      case 'pending':
+        return "#AB222E"
+      case 'preparing':
+        return '#FBA94C'
+      case 'delivered':
+        return '#04D361'
+      default:
+        return '#AB222E'
+    }
+  }
+
+  useEffect(() => {
+    async function fetchPlates(){
+      const response = await api.get(`/orders`);
+      setOrders(response.data.orders);
+    }
+    fetchPlates();
+  }, [varSearch, ]);
 
   return(
     <Container $menuIsOpen={menuIsOpen}>
@@ -52,7 +96,7 @@ export function Orders() {
 
       <FixedContent>
         <Main>
-          <BackButton onClick={handleBack}>
+          <BackButton to="/">
             <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7071 1.14568C12.0976 1.5362 12.0976 2.16937 11.7071 2.55989L2.41421 11.8528L11.7071 21.1457C12.0976 21.5362 12.0976 22.1694 11.7071 22.5599C11.3166 22.9504 10.6834 22.9504 10.2929 22.5599L0.292893 12.5599C-0.0976311 12.1694 -0.0976311 11.5362 0.292893 11.1457L10.2929 1.14568C10.6834 0.755152 11.3166 0.755152 11.7071 1.14568Z" fill="white"/>
             </svg>
@@ -62,7 +106,7 @@ export function Orders() {
           <h1>Histórico de pedidos</h1>
 
           <List $ordersNumber={ordersNumber}>
-            {/* <div className="wrapper-no-orders">
+            <div className="wrapper-no-orders">
               <NoOrders $ordersNumber={ordersNumber}>
                 <svg width="86" height="104" viewBox="0 0 86 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0004 0.000624651C24.2095 0.000624651 26.0003 1.79147 26.0003 4.0006V24.0005C26.0003 26.2096 24.2095 28.0005 22.0004 28.0005C19.7912 28.0005 18.0004 26.2096 18.0004 24.0005V4.0006C18.0004 1.79147 19.7912 0.000624651 22.0004 0.000624651Z" fill="#7C7C8A"/>
@@ -73,9 +117,9 @@ export function Orders() {
 
                 <h1>Ainda não há pedidos ainda...</h1>
               </NoOrders>
-            </div> */}
+            </div>
 
-            <div className="wrapper-table">
+            <div className="wrapper-table" $ordersNumber={ordersNumber}>
               <table>
                 <thead>
                   <TrTable>
@@ -86,50 +130,59 @@ export function Orders() {
                   </TrTable>
                 </thead>
                 <tbody>
-                  <TrTable>
-                    <TdTable>
-                    {
-                      [USER_ROLE.ADMIN].includes(user.role) && 
-                      <>
-                        <select id="status-order">
-                          <option value="pending">
-                            Pendente
-                          </option>
-                          <option value="preparing">
-                            Preparando
-                          </option>
-                          <option value="delivered">
-                            Entregue
-                          </option>
-                        </select>
-                      </> 
-                    }
+                  {
+                    orders.map(order => (
+                      <TrTable key={order.id}>
+                        <TdTable>
+                        {
+                          [USER_ROLE.ADMIN].includes(user.role) && 
+                          <>
+                            <select id="status-order" value={order.status} onChange={e => handleSelectChanges(order.id, 'status', e.target.value)}>
+                              <option value="pending">
+                                Pendente
+                              </option>
+                              <option value="preparing">
+                                Preparando
+                              </option>
+                              <option value="delivered">
+                                Entregue
+                              </option>
+                            </select>
+                          </> 
+                        }
 
-                    {
-                      [USER_ROLE.CUSTOMER].includes(user.role) && 
-                      <>
-                        <div className="wrapper-status">
-                          <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 4.57812C8 2.36899 6.20914 0.578125 4 0.578125C1.79086 0.578125 0 2.36899 0 4.57812C0 6.78726 1.79086 8.57812 4 8.57812C6.20914 8.57812 8 6.78726 8 4.57812Z" fill="#AB222E"/>
-                          </svg>
-                          Pedente
-                        </div>
-                      </> 
-                    }
-                    </TdTable>
-                    <TdTable>00000004</TdTable>
-                    <TdTable>1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá</TdTable>
-                    <TdTable>20/05 às 18h00</TdTable>
-                  </TrTable>
-                  
-                  
+                        {
+                          [USER_ROLE.CUSTOMER].includes(user.role) && 
+                          <>
+                            <div className="wrapper-status">
+                              <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 4.57812C8 2.36899 6.20914 0.578125 4 0.578125C1.79086 0.578125 0 2.36899 0 4.57812C0 6.78726 1.79086 8.57812 4 8.57812C6.20914 8.57812 8 6.78726 8 4.57812Z" fill={colorOrderStatus(order.status)}/>
+                              </svg>
+                              {translateOrderStatus(order.status)}
+                            </div>
+                          </> 
+                        }
+                        </TdTable>
+                        <TdTable>{order.id}</TdTable>
+                        <TdTable>{order.details}</TdTable>
+                        <TdTable>{order.created_at}</TdTable>
+                      </TrTable>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
 
-            <div className="wrapper-order-items">
-              <OrderItem/>
-            </div>
+            {
+              orders.map(order => (
+                <div className="wrapper-order-items">
+                  <OrderItem
+                    key={order.id}
+                    data={order}
+                  />
+                </div>
+              ))
+            }
 
           </List>
 
@@ -137,7 +190,7 @@ export function Orders() {
             [USER_ROLE.ADMIN].includes(user.role) && 
             <>
               <div className="wrapper-save-button">
-                <Button title={'Salvar Alterações'}/>
+                <Button title={'Salvar Alterações'} onClick={handleUpdateOrders}/>
               </div>
             </>
           }
