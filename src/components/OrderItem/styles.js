@@ -7,6 +7,7 @@ export const Container = styled.td`
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
   border-radius: 8px;
   padding: 1.5rem;
+  width: 50%;
 
   > head {
     display: flex;
@@ -29,10 +30,10 @@ export const Container = styled.td`
   select {
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
-    width: 100%;
     height: 3rem;
     border: 0;
     padding-left: 1rem;
+    padding-right: 3rem;
     border-radius: 8px;
 
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
