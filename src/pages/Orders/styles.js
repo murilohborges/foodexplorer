@@ -44,6 +44,7 @@ export const Main = styled.div`
 
   > .wrapper-save-button{
     width: 50%;
+    margin-top: 2rem;
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
       width: 25%;
     }
@@ -80,11 +81,13 @@ export const BackButton = styled(Link)`
 
 export const List = styled.div`
   width: 100%;
-  min-height: 18rem;
+  min-height: 22rem;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 
   > .wrapper-table {
+    display: ${({ $ordersNumber }) => $ordersNumber == 0 ? "none" : "flex"};
     padding: 0;
     width: 100%;
     height: fit-content;
@@ -98,7 +101,6 @@ export const List = styled.div`
   }
 
   > .wrapper-no-orders {
-    margin-bottom: 8rem;
     width: 100%;
   }
 
@@ -125,13 +127,13 @@ export const List = styled.div`
 
     @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
       display: block;
+      width: 100%;
     }
   }
 `;
 
 export const NoOrders = styled.div`
-  /* display: ${({ $ordersNumber }) => $ordersNumber != 0 ? "none" : "flex"}; */
-  display: flex;
+  display: ${({ $ordersNumber }) => $ordersNumber != 0 ? "none" : "flex"};
   flex-direction: column;
   align-items: center;
   gap: 2rem;
