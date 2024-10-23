@@ -42,6 +42,20 @@ export const Main = styled.div`
     }
   }
 
+  > p {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    color: ${({ theme}) => theme.COLORS.LIGHT_300};
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    grid-area: title;
+
+    @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
+      font-size: 1.5rem;
+    }
+  }
+
 `;
 
 export const BackButton = styled(Link)`
