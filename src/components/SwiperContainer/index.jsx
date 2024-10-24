@@ -53,21 +53,13 @@ export function Swiper(props) {
           loop: true,
           ...rest
         },
-        900: {
-          spaceBetween: 20,
+        1000: {
+          spaceBetween: 10,
           slidesPerView: 3,
           centeredSlidesBounds: true,
           centeredSlides: true,
           ...rest
         },
-        1000: {
-          spaceBetween: 20,
-          slidesPerView: 3,
-          centeredSlides: false,
-          loop: true,
-          ...rest
-        }
-        
   
       },
       ...rest
