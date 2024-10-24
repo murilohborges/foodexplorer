@@ -22,6 +22,7 @@ export const Container = styled.div`
     padding-bottom: 4.16rem;
     gap: 0.94rem;
     width: 19.125rem;
+    height: 35rem;
   }
 
   @media(min-width: 320px){
