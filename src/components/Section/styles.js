@@ -11,7 +11,7 @@ export const Container = styled.section`
   > h2 {
 
     color: ${({theme}) => theme.COLORS.LIGHT_300};
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 400;
     font-family: "Poppins", sans-serif;
   }
