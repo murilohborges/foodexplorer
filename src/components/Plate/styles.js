@@ -111,6 +111,8 @@ export const DetailsButton = styled.div`
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 0.875rem;
+  text-align: center;
+  width: 90%;
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
   background: transparent;
   border: none;
