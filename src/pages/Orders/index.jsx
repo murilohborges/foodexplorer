@@ -45,6 +45,9 @@ export function Orders() {
   async function handleUpdateOrders(){
     
     const response = await api.put(`/orders`, { orders });
+    
+    alert("Histórico salvo com sucesso");
+    navigate('/');
   }
 
   function translateOrderStatus(status){
