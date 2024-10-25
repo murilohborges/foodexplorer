@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
+  min-height: 100vh;
   position: ${({ $menuIsOpen }) => $menuIsOpen ? "fixed" : "initial"};
   display: flex;
   flex-direction: column;
@@ -80,7 +81,7 @@ export const TextInfo = styled.div`
     @media(min-width: ${DEVICE_BREAKPOINTS.MD}){
       margin-bottom: 0;
       text-align: left;
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 140%;
     }
   }
