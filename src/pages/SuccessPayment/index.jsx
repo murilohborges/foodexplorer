@@ -2,7 +2,7 @@ import { Container, FixedContent, Main, BackButton } from "./styles.js";
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
 import { useAuth } from "../../hooks/auth.jsx";
@@ -10,6 +10,9 @@ import { useAuth } from "../../hooks/auth.jsx";
 export function SuccessPayment() {
   const [varSearch, setVarSearch] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -24,6 +27,41 @@ export function SuccessPayment() {
   async function onCloseMenu(){
     setMenuIsOpen(false);
   }
+
+  useEffect(() => {
+    const fetchPaymentStatus = async () => {
+      try {
+        const responseCreat = await api.post('/webhook');
+        const response = await api.get('/webhook', { withCredentials: true });
+        
+        // Verifica se o status é 'ok'
+        if (response.data.status === 'ok') {
+          setStatus('Pagamento realizado com sucesso!');
+          
+          //Coletar dados do pedido do carrinho e limpa-lo em seguida
+          const detailsOrder = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
+          
+          //Envio dos dados do pedido para a tabela de pedidos
+          const responseOrderCreate = await api.post('/orders', {
+            details: detailsOrder
+          })
+          //Redirecionamento para o histórico de pagamentos
+          setTimeout(()=> {
+            navigate('/orders')
+          }, 10000)
+        } else {
+          throw new Error('Ocorreu um erro ao verificar o pagamento.');
+        }
+      } catch (err) {
+        console.error('Erro ao obter o status do pagamento:', err);
+        setError('Não foi possível verificar o pagamento.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPaymentStatus();
+  }, []);
 
   return(
     <Container $menuIsOpen={menuIsOpen}>
@@ -48,10 +86,13 @@ export function SuccessPayment() {
           </BackButton>
 
           <h1>Pedido Realizado com sucesso!</h1>
+          <p>Aguarde para ser redirecionado para o histórico de pagamentos ou clique no botão acima...</p>
 
         </Main>
 
       </FixedContent>
+
+      <Footer/>
         
     </Container>
   )
