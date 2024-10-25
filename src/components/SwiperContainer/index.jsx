@@ -23,41 +23,46 @@ export function Swiper(props) {
       },
       breakpoints: {
         320: {
-          slidesPerView: 1,
+          spaceBetween: 80,
+          slidesPerView: 2,
           centeredSlides: true,
-          loop: false
+          centeredSlidesBounds: true,
+          loop: true
         },
         380: {
-          spaceBetween: 5,
+          spaceBetween: 20,
           slidesPerView: 2,
-          centeredSlidesBounds: true
+          centeredSlides: true,
+          centeredSlidesBounds: true,
         },
         540: {
-          spaceBetween: 0,
+          spaceBetween: 20,
           slidesPerView: 3,
           centeredSlidesBounds: true,
           centeredSlides: true,
-          loop: false,
+          loop: true,
         },
         640: {
-          spaceBetween: 0,
+          spaceBetween: 20,
           slidesPerView: 3,
           centeredSlidesBounds: true,
           centeredSlides: true,
+          loop: true,
           ...rest
         },
         768: {
-          spaceBetween: 5,
+          spaceBetween: 20,
           slidesPerView: 2,
           centeredSlides: false,
           loop: true,
           ...rest
         },
-        1000: {
-          spaceBetween: 10,
+        1030: {
+          spaceBetween: 20,
           slidesPerView: 3,
           centeredSlidesBounds: true,
           centeredSlides: true,
+          loop: true,
           ...rest
         },
   
