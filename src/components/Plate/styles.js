@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-  height: fit-content;
+  height: 22rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
   
   border: none;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     padding-bottom: 4.16rem;
     gap: 0.94rem;
     width: 19.125rem;
-    height: 35rem;
+    height: 38rem;
   }
 
   @media(min-width: 320px){
@@ -75,6 +75,7 @@ export const Container = styled.div`
     padding: 0.4rem 3.6rem;
     background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
     border-radius: 5px;
+    margin-bottom: 2rem;
   } 
 `;
 
