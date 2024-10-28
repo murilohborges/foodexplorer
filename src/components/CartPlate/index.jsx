@@ -23,7 +23,7 @@ export function CartPlate({ data, ...rest }) {
       const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
       const cartFiltered = cart.filter((plate) => plate.order_id != order_id)
       localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartFiltered));
-      location.reload();
+      navigate('/');
     }
   }
 
