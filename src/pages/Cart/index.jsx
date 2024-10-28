@@ -32,7 +32,7 @@ export function Cart() {
       return alert("O carrinho está vazio. Adicione pratos para avançar para o pagamento!")
     }
     let itemsUser = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
-    const response = await api.post("/stripe", { itemsUser });
+    const response = await api.post("/stripe/create-checkout-session", { itemsUser });
     if(response.status !== 200) {
       return alert(error.response.data.message);
     }
