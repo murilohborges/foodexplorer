@@ -29,9 +29,8 @@ export function SuccessPayment() {
   }
 
   useEffect(() => {
-    const fetchPaymentStatus = async () => {
+    const intervalId = setInterval(async () => {
       try {
-        const responseCreat = await api.post('/webhook');
         const response = await api.get('/webhook', { withCredentials: true });
         
         // Verifica se o status é 'ok'
@@ -45,6 +44,13 @@ export function SuccessPayment() {
           const responseOrderCreate = await api.post('/orders', {
             details: detailsOrder
           })
+
+          // Limpa o carrinho do localStorage
+          localStorage.removeItem(`@foodexplorer:cartuser${user.id}`);
+
+          // Interrompe o polling ao obter a confirmação do pagamento
+          clearInterval(intervalId);
+
           //Redirecionamento para o histórico de pagamentos
           setTimeout(()=> {
             navigate('/orders')
@@ -52,12 +58,13 @@ export function SuccessPayment() {
         }
       } catch (err) {
         console.error('Erro ao obter o status do pagamento:', err);
-        navigate('/')
         setError('Não foi possível verificar o pagamento.');
+        clearInterval(intervalId);
+        navigate('/')
       } finally {
         setLoading(false);
       }
-    };
+    });
 
     fetchPaymentStatus();
   }, []);
