@@ -29,7 +29,8 @@ export function SuccessPayment() {
   }
 
   useEffect(() => {
-    const intervalId = setInterval(async () => {
+    const fetchPaymentStatus = async () => {
+
       try {
         const response = await api.get('/webhook', { withCredentials: true });
         
@@ -59,12 +60,10 @@ export function SuccessPayment() {
       } catch (err) {
         console.error('Erro ao obter o status do pagamento:', err);
         setError('Não foi possível verificar o pagamento.');
-        clearInterval(intervalId);
-        navigate('/')
       } finally {
         setLoading(false);
       }
-    });
+    };
 
     fetchPaymentStatus();
   }, []);
