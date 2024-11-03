@@ -34,23 +34,21 @@ export function SuccessPayment() {
       try {
         const response = await api.get('/webhook', { withCredentials: true });
         
-        // Verifica se o status é 'ok'
-        if (response.data.status === 'ok') {
-          setStatus('Pagamento realizado com sucesso!');
+        //Verifica se o status é 'ok'
+        if (response.data.message === 'Pagamento confirmado!') {
+          setStatus(response.data.message);
           
           //Coletar dados do pedido do carrinho e limpa-lo em seguida
           const detailsOrder = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
-          
+          console.log(detailsOrder)
           //Envio dos dados do pedido para a tabela de pedidos
           const responseOrderCreate = await api.post('/orders', {
             details: detailsOrder
           })
 
-          // Limpa o carrinho do localStorage
+          //Limpa o carrinho do localStorage
           localStorage.removeItem(`@foodexplorer:cartuser${user.id}`);
 
-          // Interrompe o polling ao obter a confirmação do pagamento
-          clearInterval(intervalId);
 
           //Redirecionamento para o histórico de pagamentos
           setTimeout(()=> {
