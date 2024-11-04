@@ -53,7 +53,7 @@ export function SuccessPayment() {
           //Redirecionamento para o histórico de pagamentos
           setTimeout(()=> {
             navigate('/orders')
-          }, 10000)
+          }, 5000)
         }
       } catch (err) {
         console.error('Erro ao obter o status do pagamento:', err);
