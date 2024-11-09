@@ -10,6 +10,14 @@ export const Container = styled.th`
     border-left: none;
   }
 
+  &:nth-child(2), &:nth-child(3){
+    padding-right: 2rem;
+  }
+
+  &:nth-child(4){
+    padding-right: 4rem;
+  }
+
   &:last-child {
     border-top-right-radius: 0.5rem;
   }

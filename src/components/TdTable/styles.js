@@ -11,6 +11,9 @@ export const Container = styled.td`
     border-left: none;
     padding-right: 1rem;
   }
+  &:nth-child(2){
+    padding-right: 3rem;
+  }
 
   > .wrapper-status {
     display: flex;

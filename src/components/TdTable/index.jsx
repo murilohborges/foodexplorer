@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export function TdTable ({ children, ...rest }){
+export function TdTable ({ children, width, ...rest }){
   return (
-    <Container>
+    <Container style={{ width: width }}>
       {children}
     </Container>
   );
