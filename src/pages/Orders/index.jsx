@@ -63,11 +63,6 @@ export function Orders() {
     }
   }
 
-  async function getNameCustomer(user_id_customer){
-    // const response = await api.get(`/users`, user_id_customer);
-    return 1
-  }
-
   function colorOrderStatus(status){
     switch(status) {
       case 'pending':
