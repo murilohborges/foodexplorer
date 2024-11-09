@@ -15,7 +15,7 @@ import { USER_ROLE } from '../../utils/roles.js';
 
 export function Orders() {
   const [varSearch, setVarSearch] = useState("");
-  const [statusOrder, setStatusOrder] = useState("");
+  const [ordersUpdated, setOrdersUpdated] = useState([]);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
@@ -63,6 +63,11 @@ export function Orders() {
     }
   }
 
+  async function getNameCustomer(user_id_customer){
+    // const response = await api.get(`/users`, user_id_customer);
+    return 1
+  }
+
   function colorOrderStatus(status){
     switch(status) {
       case 'pending':
@@ -75,11 +80,20 @@ export function Orders() {
         return '#AB222E'
     }
   }
-
+  
   useEffect(() => {
     async function fetchPlates(){
-      const response = await api.get(`/orders`);
-      setOrders(response.data.orders);
+      const responseOrders = await api.get(`/orders`);
+
+      const ordersUpdated = await Promise.all(
+        responseOrders.data.orders.map(async(order) => {
+          const responseUsers = await api.get('/users', { 
+            params: { user_id_customer: order.user_id_who_ordered }
+          });
+          return { ...order, customer: responseUsers.data.customer_name };
+        })
+      );
+      setOrders(ordersUpdated);
     }
     fetchPlates();
   }, [varSearch, ]);
@@ -126,17 +140,18 @@ export function Orders() {
               <table>
                 <thead>
                   <TrTable>
-                    <ThTable>Status</ThTable>
-                    <ThTable>Código</ThTable>
-                    <ThTable>Detalhamento</ThTable>
-                    <ThTable>Data e hora</ThTable>
+                    <ThTable width="10%">Status</ThTable>
+                    <ThTable width="10%">Cliente</ThTable>
+                    <ThTable width="10%">Código</ThTable>
+                    <ThTable width="50%">Detalhamento</ThTable>
+                    <ThTable width="20%">Data e hora</ThTable>
                   </TrTable>
                 </thead>
                 <tbody>
                   {
                     orders.map(order => (
                       <TrTable key={order.id}>
-                        <TdTable>
+                        <TdTable width="10%">
                         {
                           [USER_ROLE.ADMIN].includes(user.role) && 
                           <>
@@ -166,9 +181,10 @@ export function Orders() {
                           </> 
                         }
                         </TdTable>
-                        <TdTable>{order.id}</TdTable>
-                        <TdTable>{order.details}</TdTable>
-                        <TdTable>{order.created_at}</TdTable>
+                        <TdTable width="10%">{order.customer}</TdTable>
+                        <TdTable width="10%">{order.id}</TdTable>
+                        <TdTable width="50%">{order.details}</TdTable>
+                        <TdTable width="20%">{order.created_at}</TdTable>
                       </TrTable>
                     ))
                   }
