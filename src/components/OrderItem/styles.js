@@ -26,6 +26,10 @@ export const Container = styled.td`
     align-items: center;
     gap: 5px;
   }
+
+  .customer-name{
+    margin-bottom: 1rem;
+  }
   
   select {
     background-color: ${({ theme }) => theme.COLORS.DARK_800};

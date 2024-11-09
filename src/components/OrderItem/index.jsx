@@ -9,6 +9,7 @@ export function OrderItem (data, ...rest){
   const orderDate = `${orderData.created_at}`
   const orderStatus = `${orderData.status}`
   const orderDetails = `${orderData.details}`
+  const orderCustomer = `${orderData.customer}`
 
   function translateOrderStatus(status){
     switch(status) {
@@ -48,6 +49,7 @@ export function OrderItem (data, ...rest){
         </div>
         <div className="order-date">{orderDate}</div>
       </head>
+      <div className="customer-name">Cliente: {orderCustomer}</div>
       <div className="order-description">{orderDetails}</div>
 
       <div className="select-order-status">
