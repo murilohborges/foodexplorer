@@ -1,12 +1,10 @@
 import { Container, PlateImage, EditIcon, DetailsButton, FavIcon, ControlNumberPlates } from './styles';
-import { SwiperSlide } from '../SwiperContainer';
-import plateIcon from '../../assets/plateIcon.png'
-import { Link } from "react-router-dom";
+import plateIcon from '../../assets/plateIcon.png';
 import { api } from '../../services/api';
 import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function Plate({ data, receivedOrderToCart, ...rest }){
   const PlateTitle = `${data.title} >`;

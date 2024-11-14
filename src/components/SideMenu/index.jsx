@@ -91,7 +91,6 @@ export function SideMenu({ menuIsOpen, onCloseMenu, receivedSearch}) {
         <p>© 2023 - Todos os direitos reservados.</p>
       </FooterMenu>
 
-
     </Container>
   );
 }

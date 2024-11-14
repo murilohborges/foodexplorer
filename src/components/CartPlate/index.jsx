@@ -2,8 +2,7 @@ import { Container, PlateImage, Info, ButtonRemove } from './styles';
 import plateIcon from '../../assets/plateIcon.png';
 import { useAuth } from "../../hooks/auth.jsx";
 import { api } from '../../services/api.js';
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function CartPlate({ data, ...rest }) {
   const avatarUrl = data.plate_avatar ? `${api.defaults.baseURL}/files/${data.plate_avatar}` : plateIcon;

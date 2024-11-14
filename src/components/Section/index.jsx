@@ -5,8 +5,6 @@ export function Section({ title, children }){
     <Container>
       <h2>{title}</h2>
       {children}
-
     </Container>
-
   )
 }

@@ -1,5 +1,4 @@
-import { Container, Logo, InputSearch, ButtonNewPlate, ButtonLogout, ButtonOrders, ButtonFavourite, ButtonHeader } from "./styles.js";
-import { Link } from "react-router-dom";
+import { Container, Logo, InputSearch, ButtonLogout, ButtonOrders } from "./styles.js";
 import { useAuth } from "../../hooks/auth.jsx";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -115,7 +114,6 @@ export function Header({receivedSearch, receivedMenuIsOpen}) {
 
       </div>
 
-        
     </Container>
   )
 }

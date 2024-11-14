@@ -9,11 +9,9 @@ export const Container = styled.section`
   margin-bottom: 2rem;
 
   > h2 {
-
     color: ${({theme}) => theme.COLORS.LIGHT_300};
     font-size: 1.5rem;
     font-weight: 400;
     font-family: "Poppins", sans-serif;
   }
-
 `;
