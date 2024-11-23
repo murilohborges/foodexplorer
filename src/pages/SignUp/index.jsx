@@ -48,6 +48,7 @@ export function SignUp() {
         <div className="wrapper-input">
           <label>Seu nome</label>
           <Input
+            id="name-input-SignIn"
             type="text"
             placeholder="Exemplo: Maria da Silva"
             onChange={e => setName(e.target.value)}
@@ -56,7 +57,8 @@ export function SignUp() {
 
         <div className="wrapper-input">
           <label>Email</label>
-          <Input 
+          <Input
+            id="email-input-SignIn"
             placeholder="Exemplo: exemplo@exemplo.com.br"
             type='email'
             onChange={e => setEmail(e.target.value)}
@@ -65,7 +67,8 @@ export function SignUp() {
 
         <div className="wrapper-input">
           <label>Senha</label>
-          <Input 
+          <Input
+            id="password-input-SignIn"
             type="password" 
             placeholder="No mínimo 6 caracteres"
             onChange={e => setPassword(e.target.value)}
