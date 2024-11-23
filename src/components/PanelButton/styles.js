@@ -8,7 +8,7 @@ export const Container = styled.section`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10rem;
+  gap: 6rem;
 
   font-family: "Roboto", sans-serif;
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
