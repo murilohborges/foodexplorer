@@ -1,27 +1,53 @@
 import { Container, Form, HeaderLogo } from "./styles.js";
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import { LoadingWindow } from '../../components/LoadingWindow';
+import { Snackbars } from '../../components/Snackbars/index.jsx';
 import { Link } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [severity, setSeverity] = useState("info");
+  const [loading, setLoading] = useState(false); 
 
-  const { signIn } = useAuth();
+  const { signIn, alertMessage, clearAlertMessage } = useAuth();
+
+  useEffect(() => {
+    if (alertMessage) {
+      setOpenSnackbar(true);
+      setSeverity(alertMessage === "E-mail e/ou senha incorreta" ? "error" : "success");
+    } else if (loading) {
+      setOpenSnackbar(true);
+      setSeverity("info");
+    }
+  }, [alertMessage, loading]);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    clearAlertMessage();
+  };
   
-  function handleSignIn(){
-    signIn({ email, password });
-    setIsLoading(true)
+  async function handleSignIn(){
+    setLoading(true); 
+    clearAlertMessage();
+    await signIn({ email, password });
+    setTimeout(() =>{
+      setLoading(false);
+    }, 1000)
   }
 
   return(
     <Container>
-      <LoadingWindow isLoading={isLoading}/>
+      <Snackbars 
+        open={openSnackbar}
+        severity={severity} 
+        title={alertMessage || "Carregando..."}
+        onClose={handleCloseSnackbar} 
+      />
 
       <HeaderLogo>
         <svg width="39" height="44" viewBox="0 0 39 44" fill="none" xmlns="http://www.w3.org/2000/svg">
