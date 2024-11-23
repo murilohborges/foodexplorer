@@ -36,7 +36,6 @@ export function Profile() {
       if(newName){
         const userDataToUpdate = JSON.parse(localStorage.getItem(`@foodexplorer:user`));
         userDataToUpdate.name = newName;
-        console.log(userDataToUpdate)
         localStorage.setItem(`@foodexplorer:user`, JSON.stringify(userDataToUpdate));
       }
       
