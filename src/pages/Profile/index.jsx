@@ -6,8 +6,7 @@ import { Footer } from "../../components/Footer/index.jsx";
 import { Input } from "../../components/Input/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { Snackbars } from "../../components/Snackbar";
-import { api } from '../../services/api.js'
-
+import { api } from '../../services/api.js';
 
 export function Profile() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -34,13 +33,19 @@ export function Profile() {
       old_password: oldPassword
     }).then(() => {
       setAlertMessage("Perfil atualizado com sucesso!");
+      if(newName){
+        const userDataToUpdate = JSON.parse(localStorage.getItem(`@foodexplorer:user`));
+        userDataToUpdate.name = newName;
+        console.log(userDataToUpdate)
+        localStorage.setItem(`@foodexplorer:user`, JSON.stringify(userDataToUpdate));
+      }
+      
     }).catch(error => {
       if(error.response){
         setAlertMessage(error.response.data.message);
-      }else{
-        setAlertMessage("Não foi possível salvar as alterações");
       }
-    })
+    });
+
   }
 
   async function receivedSearch(search){
