@@ -1,5 +1,4 @@
 import { Snackbar, Alert } from "@mui/material";
-import { useState } from 'react';
 
 export function Snackbars({ title, severity, autoHideDuration = 6000, onClose, ...rest }) {
 
