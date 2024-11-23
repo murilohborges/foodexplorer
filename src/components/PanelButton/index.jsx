@@ -2,10 +2,12 @@ import { Container, ButtonHeader } from "./styles.js";
 import { useNavigate } from "react-router-dom";
 import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
+import { useState, useEffect } from "react";
 
 export function PanelButton(){
   const navigation = useNavigate();
   const { user } = useAuth();
+  const [userName, setUserName] = useState("");
 
   function handleNewPlate(){
     navigation("/new");
@@ -23,9 +25,14 @@ export function PanelButton(){
     navigation("/orders");
   }
 
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("@foodexplorer:user"));
+    setUserName(userData.name)
+  }, []);
+
   return (
     <Container>
-      <h2>Bem vindo(a) {user.name}</h2>
+      <h2>Bem vindo(a) {userName}</h2>
 
       <div className="wrapper-buttons">
         <ButtonHeader onClick={handleToProfile}>Meu perfil</ButtonHeader>
