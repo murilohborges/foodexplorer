@@ -40,6 +40,10 @@ export function SignIn() {
     }, 1000)
   }
 
+  async function handleToRegister(){
+    clearAlertMessage();
+  }
+
   return(
     <Container>
       <Snackbars 
@@ -82,7 +86,7 @@ export function SignIn() {
 
         <Button title="Entrar" onClick={handleSignIn}/>
 
-        <Link id="button-auth" className="button-auth" to="/register">Criar nova conta</Link>
+        <Link id="button-auth" className="button-auth" onClick={handleToRegister} to="/register">Criar nova conta</Link>
 
       </Form>
         
