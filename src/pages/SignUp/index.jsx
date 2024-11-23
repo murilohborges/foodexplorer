@@ -1,7 +1,7 @@
 import { Container, Form, HeaderLogo } from "./styles.js";
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import { Snackbars } from '../../components/Snackbars';
+import { Snackbars } from '../../components/Snackbar';
 import { Link, useNavigate } from "react-router-dom";
 import{ useState, useEffect } from 'react';
 import { api } from '../../services/api.js'
