@@ -1,9 +1,9 @@
 import { Container, Form, HeaderLogo } from "./styles.js";
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-
+import { Snackbars } from '../../components/Snackbars/index.jsx';
 import { Link, useNavigate } from "react-router-dom";
-import{ useState } from 'react';
+import{ useState, useEffect } from 'react';
 import { api } from '../../services/api.js'
 
 
@@ -13,26 +13,66 @@ export function SignUp() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [severity, setSeverity] = useState("info");
+  const [loading, setLoading] = useState(false);
+
   function handleSignUp(){
     if(!name || !email || !password){
-      return alert("Preencha todos os campos")
+      setAlertMessage("Preencha todos os campos");
+      return
     }
 
     api.post("/users", { name, email, password }).then(() => {
-      alert("Usuário cadastrado com sucesso!");
+      setAlertMessage("Usuário cadastrado com sucesso!");
       navigate("/");
     }).catch(error => {
       if(error.response){
-        alert(error.response.data.message);
+        setAlertMessage(error.response.data.message);
       }else{
-        alert("Não foi possível cadastrar");
+        setAlertMessage("Não foi possível cadastrar");
       }
     })
+  }
 
+  useEffect(() => {
+    if (alertMessage) {
+      setOpenSnackbar(true);
+      switch(alertMessage){
+        case "Preencha todos os campos":
+          setSeverity("warning");
+          break;
+        case "Usuário cadastrado com sucesso!":
+          setSeverity("success");
+          break;
+        default:
+        setSeverity("error");
+        break;
+      }
+    } else if (loading) {
+      setOpenSnackbar(true);
+      setSeverity("info");
+    }
+  }, [alertMessage, loading]);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setAlertMessage("");
+  };
+
+  async function handleToLogin(){
+    setAlertMessage("");
   }
 
   return(
     <Container>
+      <Snackbars 
+        open={openSnackbar}
+        severity={severity} 
+        title={alertMessage || "Carregando..."}
+        onClose={handleCloseSnackbar} 
+      />
 
       <HeaderLogo>
         <svg width="39" height="44" viewBox="0 0 39 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +116,7 @@ export function SignUp() {
         </div>
 
         <Button title="Criar conta" onClick={handleSignUp} />
-        <Link className="button-auth" to="/">Já tenho uma conta</Link>
+        <Link className="button-auth" onClick={handleToLogin} to="/">Já tenho uma conta</Link>
 
       </Form>
         
