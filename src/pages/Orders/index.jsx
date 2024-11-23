@@ -53,26 +53,26 @@ export function Orders() {
   function translateOrderStatus(status){
     switch(status) {
       case 'pending':
-        return 'Pendente'
+        return 'Pendente';
       case 'preparing':
-        return 'Preparando'
+        return 'Preparando';
       case 'delivered':
-        return 'Entregue'
+        return 'Entregue';
       default:
-        return 'Pendente'
+        return 'Pendente';
     }
   }
 
   function colorOrderStatus(status){
     switch(status) {
       case 'pending':
-        return "#AB222E"
+        return "#AB222E";
       case 'preparing':
-        return '#FBA94C'
+        return '#FBA94C';
       case 'delivered':
-        return '#04D361'
+        return '#04D361';
       default:
-        return '#AB222E'
+        return '#AB222E';
     }
   }
   
