@@ -51,6 +51,7 @@ export function SignUp() {
         break;
       }
     } else if (loading) {
+      setLoading(true)
       setOpenSnackbar(true);
       setSeverity("info");
     }
