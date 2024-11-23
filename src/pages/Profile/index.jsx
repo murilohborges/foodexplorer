@@ -1,23 +1,25 @@
 import { Container, BackButton, Main, Form, SaveButton, Row, FixedContent } from "./styles.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Input } from "../../components/Input/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
-
-import { useAuth } from '../../hooks/auth';
+import { Snackbars } from "../../components/Snackbar";
 import { api } from '../../services/api.js'
 
 
 export function Profile() {
-  const { user } = useAuth();
-
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
+
+  const [alertMessage, setAlertMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [severity, setSeverity] = useState("info");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   function handleBack(){
@@ -25,16 +27,20 @@ export function Profile() {
   }
 
   async function handleUpdateProfile(){
-
-    const response = await api.put("/users", {
+    await api.put("/users", {
       name: newName,
       email: newEmail,
       password: password,
       old_password: oldPassword
-    });
-    
-    alert("Perfil atualizado com sucesso");
-    navigate(-1);
+    }).then(() => {
+      setAlertMessage("Perfil atualizado com sucesso!");
+    }).catch(error => {
+      if(error.response){
+        setAlertMessage(error.response.data.message);
+      }else{
+        setAlertMessage("Não foi possível salvar as alterações");
+      }
+    })
   }
 
   async function receivedSearch(search){
@@ -49,8 +55,40 @@ export function Profile() {
     setMenuIsOpen(false);
   }
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setAlertMessage("");
+  };
+
+  useEffect(() => {
+    if (alertMessage) {
+      setOpenSnackbar(true);
+      switch(alertMessage){
+        case "Preencha todos os campos":
+          setSeverity("warning");
+          break;
+        case "Perfil atualizado com sucesso!":
+          setSeverity("success");
+          break;
+        default:
+        setSeverity("error");
+        break;
+      }
+    } else if (loading) {
+      setLoading(true)
+      setOpenSnackbar(true);
+      setSeverity("info");
+    }
+  }, [alertMessage, loading]);
+
   return(
     <Container $menuIsOpen={menuIsOpen}>
+      <Snackbars
+        open={openSnackbar}
+        severity={severity} 
+        title={alertMessage}
+        onClose={handleCloseSnackbar} 
+      />
 
       <SideMenu
         menuIsOpen={menuIsOpen}
