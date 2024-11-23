@@ -1,7 +1,7 @@
 import { Container, Form, HeaderLogo } from "./styles.js";
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import { Snackbars } from '../../components/Snackbars/index.jsx';
+import { Snackbars } from '../../components/Snackbar';
 import { Link } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
 import { useState, useEffect } from 'react';
