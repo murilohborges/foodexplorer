@@ -12,7 +12,6 @@ export function SignIn() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
   const { signIn } = useAuth();
   const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
@@ -23,12 +22,11 @@ export function SignIn() {
       setOpenSnackbar(true);
       updateSnackbarMessage("Carregando...", "info")
     }
-  }, [alertMessage, loading]);
+  }, [snackbarMessage, loading]);
   
   async function handleSignIn(){
     setLoading(true);
     await signIn({ email, password });
-    clearSnackbarMessage();
     setTimeout(() =>{
       setLoading(false);
     }, 1000)
@@ -36,7 +34,7 @@ export function SignIn() {
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
-    setAlertMessage("");
+    clearSnackbarMessage();
   };
 
   async function handleToRegister(){
