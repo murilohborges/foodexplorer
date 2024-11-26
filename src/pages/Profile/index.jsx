@@ -7,6 +7,7 @@ import { Input } from "../../components/Input/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { Snackbars } from "../../components/Snackbar";
 import { api } from '../../services/api.js';
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function Profile() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -14,11 +15,10 @@ export function Profile() {
   const [newEmail, setNewEmail] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
-
-  const [alertMessage, setAlertMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [severity, setSeverity] = useState("info");
   const [loading, setLoading] = useState(false);
+
+  const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
   const navigate = useNavigate();
   function handleBack(){
@@ -32,7 +32,7 @@ export function Profile() {
       password: password,
       old_password: oldPassword
     }).then(() => {
-      setAlertMessage("Perfil atualizado com sucesso!");
+      updateSnackbarMessage("Perfil atualizado com sucesso!", "success");
       if(newName){
         const userDataToUpdate = JSON.parse(localStorage.getItem(`@foodexplorer:user`));
         userDataToUpdate.name = newName;
@@ -41,10 +41,9 @@ export function Profile() {
       
     }).catch(error => {
       if(error.response){
-        setAlertMessage(error.response.data.message);
+        updateSnackbarMessage(error.response.data.message, "error");
       }
     });
-
   }
 
   async function receivedSearch(search){
@@ -61,36 +60,24 @@ export function Profile() {
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
-    setAlertMessage("");
+    clearSnackbarMessage();
   };
 
   useEffect(() => {
-    if (alertMessage) {
+    if (snackbarMessage) {
       setOpenSnackbar(true);
-      switch(alertMessage){
-        case "Preencha todos os campos":
-          setSeverity("warning");
-          break;
-        case "Perfil atualizado com sucesso!":
-          setSeverity("success");
-          break;
-        default:
-        setSeverity("error");
-        break;
-      }
     } else if (loading) {
-      setLoading(true)
       setOpenSnackbar(true);
-      setSeverity("info");
+      updateSnackbarMessage("Carregando...", "info");
     }
-  }, [alertMessage, loading]);
+  }, [snackbarMessage, loading]);
 
   return(
     <Container $menuIsOpen={menuIsOpen}>
       <Snackbars
         open={openSnackbar}
         severity={severity} 
-        title={alertMessage}
+        title={snackbarMessage}
         onClose={handleCloseSnackbar} 
       />
 
