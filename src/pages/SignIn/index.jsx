@@ -5,43 +5,42 @@ import { Snackbars } from '../../components/Snackbar';
 import { Link } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
 import { useState, useEffect } from 'react';
-
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [severity, setSeverity] = useState("info");
-  const [loading, setLoading] = useState(false); 
-
-  const { signIn, alertMessage, clearAlertMessage } = useAuth();
+  const [alertMessage, setAlertMessage] = useState("");
+  const { signIn } = useAuth();
+  const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
   useEffect(() => {
-    if (alertMessage) {
+    if (snackbarMessage) {
       setOpenSnackbar(true);
-      setSeverity(alertMessage === "E-mail e/ou senha incorreta" ? "error" : "success");
     } else if (loading) {
       setOpenSnackbar(true);
-      setSeverity("info");
+      updateSnackbarMessage("Carregando...", "info")
     }
   }, [alertMessage, loading]);
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-    clearAlertMessage();
-  };
   
   async function handleSignIn(){
-    setLoading(true); 
-    clearAlertMessage();
+    setLoading(true);
     await signIn({ email, password });
+    clearSnackbarMessage();
     setTimeout(() =>{
       setLoading(false);
     }, 1000)
   }
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setAlertMessage("");
+  };
+
   async function handleToRegister(){
-    clearAlertMessage();
+    clearSnackbarMessage();
   }
 
   return(
@@ -49,7 +48,7 @@ export function SignIn() {
       <Snackbars 
         open={openSnackbar}
         severity={severity} 
-        title={alertMessage || "Carregando..."}
+        title={snackbarMessage}
         onClose={handleCloseSnackbar} 
       />
 
