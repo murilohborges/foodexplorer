@@ -5,65 +5,53 @@ import { Snackbars } from '../../components/Snackbar';
 import { Link, useNavigate } from "react-router-dom";
 import{ useState, useEffect } from 'react';
 import { api } from '../../services/api.js'
-
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
-  const [alertMessage, setAlertMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [severity, setSeverity] = useState("info");
   const [loading, setLoading] = useState(false);
 
   function handleSignUp(){
     if(!name || !email || !password){
-      setAlertMessage("Preencha todos os campos");
+      updateSnackbarMessage("Preencha todos os campos", "warning");
       return
     }
 
     api.post("/users", { name, email, password }).then(() => {
-      setAlertMessage("Usuário cadastrado com sucesso!");
+      updateSnackbarMessage("Carregando", "info");
+      updateSnackbarMessage("Usuário cadastrado com sucesso!", "success");
       navigate("/");
     }).catch(error => {
       if(error.response){
-        setAlertMessage(error.response.data.message);
+        updateSnackbarMessage(error.response.data.message, "error");
       }else{
-        setAlertMessage("Não foi possível cadastrar");
+        updateSnackbarMessage("Não foi possível cadastrar", "error");
       }
     })
   }
 
   useEffect(() => {
-    if (alertMessage) {
+    if (snackbarMessage) {
       setOpenSnackbar(true);
-      switch(alertMessage){
-        case "Preencha todos os campos":
-          setSeverity("warning");
-          break;
-        case "Usuário cadastrado com sucesso!":
-          setSeverity("success");
-          break;
-        default:
-        setSeverity("error");
-        break;
-      }
     } else if (loading) {
-      setLoading(true)
       setOpenSnackbar(true);
-      setSeverity("info");
+      updateSnackbarMessage("Carregando...", "info")
     }
-  }, [alertMessage, loading]);
+  }, [snackbarMessage, loading]);
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
-    setAlertMessage("");
+    clearSnackbarMessage();
   };
 
   async function handleToLogin(){
-    setAlertMessage("");
+    clearSnackbarMessage();
   }
 
   return(
@@ -71,7 +59,7 @@ export function SignUp() {
       <Snackbars 
         open={openSnackbar}
         severity={severity} 
-        title={alertMessage || "Carregando..."}
+        title={snackbarMessage}
         onClose={handleCloseSnackbar} 
       />
 
