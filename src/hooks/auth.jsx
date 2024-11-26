@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { api } from "../services/api";
+import { useSnackbar } from "../context/SnackbarContext";
 
 export const AuthContext = createContext({});
 
@@ -16,7 +17,7 @@ function AuthProvider({ children }) {
     }
   });
 
-  const [alertMessage, setAlertMessage] = useState("");
+  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
   async function signIn({ email, password }) {
     try {
@@ -31,12 +32,12 @@ function AuthProvider({ children }) {
       }
 
       setData({ user });
-      setAlertMessage("Login realizado com sucesso!");
+      updateSnackbarMessage("Login realizado com sucesso!", "success");
     } catch(error) {
       if(error.response) {
-        setAlertMessage(String(error.response.data.message))
+        updateSnackbarMessage(String(error.response.data.message), "error")
       }else{
-        setAlertMessage("Erro ao realizar o login. Tente novamente.")
+        updateSnackbarMessage("Erro ao realizar o login. Tente novamente.", "error")
       }
     }
 
@@ -44,16 +45,13 @@ function AuthProvider({ children }) {
 
   function signOut(){
     localStorage.removeItem("@foodexplorer:user");
-    setAlertMessage("Logout realizado com sucesso!");
+    updateSnackbarMessage("Logout realizado com sucesso!", "success");
+    clearSnackbarMessage();
     setData({});
   }
 
-  function clearAlertMessage() {
-    setAlertMessage("");
-  }
-
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user, alertMessage, clearAlertMessage }} >
+    <AuthContext.Provider value={{ signIn, signOut, user: data.user }} >
       {children}
     </AuthContext.Provider>
   )
