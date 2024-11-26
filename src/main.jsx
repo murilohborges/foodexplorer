@@ -7,14 +7,17 @@ import theme from './styles/theme.js'
 
 import GlobalStyles from './styles/global.js'
 import { AuthProvider } from './hooks/auth.jsx';
+import { SnackbarProvider } from './context/SnackbarContext.jsx'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      <AuthProvider>
-        <Routes/>
-      </AuthProvider>
+      <SnackbarProvider>
+        <AuthProvider>
+            <Routes/>
+        </AuthProvider>
+      </SnackbarProvider>
       
     </ThemeProvider>
   </React.StrictMode>
