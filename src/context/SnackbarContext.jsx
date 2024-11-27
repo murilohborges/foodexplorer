@@ -5,17 +5,10 @@ const SnackbarContext = createContext();
 export function SnackbarProvider({ children }) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("");
-  const [loading, setLoading] = useState(false); 
 
   const updateSnackbarMessage = (message, severity) => {
     setSnackbarMessage(message);
     setSeverity(severity);
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-    clearSnackbarMessage();
-    return openSnackbar
   };
 
   const clearSnackbarMessage = () => {
@@ -23,7 +16,7 @@ export function SnackbarProvider({ children }) {
   };
 
   return (
-    <SnackbarContext.Provider value={{ snackbarMessage, severity, handleCloseSnackbar, updateSnackbarMessage, clearSnackbarMessage }}>
+    <SnackbarContext.Provider value={{ snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage }}>
       {children}
     </SnackbarContext.Provider>
   );
