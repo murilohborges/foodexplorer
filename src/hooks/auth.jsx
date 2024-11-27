@@ -46,7 +46,6 @@ function AuthProvider({ children }) {
   function signOut(){
     localStorage.removeItem("@foodexplorer:user");
     updateSnackbarMessage("Logout realizado com sucesso!", "success");
-    clearSnackbarMessage();
     setData({});
   }
 
