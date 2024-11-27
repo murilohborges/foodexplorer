@@ -20,7 +20,7 @@ export function SignIn() {
       setOpenSnackbar(true);
     } else if (loading) {
       setOpenSnackbar(true);
-      updateSnackbarMessage("Carregando...", "info")
+      updateSnackbarMessage("Carregando...", "info");
     }
   }, [snackbarMessage, loading]);
   
