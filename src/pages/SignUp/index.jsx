@@ -12,7 +12,7 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
+  const { updateSnackbarMessage } = useSnackbar();
 
   function handleSignUp(){
     if(!name || !email || !password){
@@ -31,10 +31,6 @@ export function SignUp() {
         updateSnackbarMessage("Não foi possível cadastrar", "error");
       }
     })
-  }
-
-  async function handleToLogin(){
-    clearSnackbarMessage();
   }
 
   return(
@@ -82,7 +78,7 @@ export function SignUp() {
         </div>
 
         <Button title="Criar conta" onClick={handleSignUp} />
-        <Link className="button-auth" onClick={handleToLogin} to="/">Já tenho uma conta</Link>
+        <Link className="button-auth" to="/">Já tenho uma conta</Link>
 
       </Form>
         
