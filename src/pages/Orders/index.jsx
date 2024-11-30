@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
 import { useAuth } from "../../hooks/auth.jsx";
 import { USER_ROLE } from '../../utils/roles.js';
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function Orders() {
   const [varSearch, setVarSearch] = useState("");
@@ -21,6 +22,7 @@ export function Orders() {
   const navigate = useNavigate();
   const ordersNumber = orders.length;
   const { user } = useAuth();
+  const { updateSnackbarMessage } = useSnackbar();
 
   async function receivedSearch(search){
     setVarSearch(search);
@@ -46,7 +48,7 @@ export function Orders() {
     
     const response = await api.put(`/orders`, { orders });
     
-    alert("Histórico salvo com sucesso");
+    updateSnackbarMessage("Histórico salvo com sucesso");
     navigate('/');
   }
 
