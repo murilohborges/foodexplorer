@@ -27,7 +27,8 @@ export function SnackbarProvider({ children }) {
       {children}
       <Snackbars 
         open={openSnackbar}
-        severity={severity} 
+        severity={severity}
+        autoHideDuration={snackbarMessage == "Carregando"  ? 50000 : 6000}
         title={snackbarMessage}
         onClose={(event, reason) => {
           if (reason === "clickaway") return;
