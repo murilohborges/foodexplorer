@@ -10,15 +10,11 @@ export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn } = useAuth();
-  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
+  const { updateSnackbarMessage } = useSnackbar();
   
   async function handleSignIn(){
     updateSnackbarMessage("Carregando", "info");
     await signIn({ email, password });
-  }
-
-  async function handleToRegister(){
-    clearSnackbarMessage();
   }
 
   return(
@@ -56,7 +52,7 @@ export function SignIn() {
 
         <Button title="Entrar" onClick={handleSignIn}/>
 
-        <Link id="button-auth" className="button-auth" onClick={handleToRegister} to="/register">Criar nova conta</Link>
+        <Link id="button-auth" className="button-auth" to="/register">Criar nova conta</Link>
 
       </Form>
         
