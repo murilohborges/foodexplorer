@@ -6,13 +6,9 @@ import { Plate } from "../../components/Plate/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
-import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
-
 import { Swiper } from '../../components/SwiperContainer/index.jsx';
 import { PanelButton } from "../../components/PanelButton/index.jsx";
-import { RiOrderPlayFill } from "react-icons/ri";
-
 
 export function Home() {
   const [varSearch, setVarSearch] = useState("");
@@ -147,16 +143,10 @@ export function Home() {
                 ))
               }
             </Swiper>
-
           </Section>
-
         </Main>
-
-        
       </FixedContent>      
-      
       <Footer/>
-        
     </Container>
   )
 }
