@@ -6,35 +6,23 @@ const SnackbarContext = createContext();
 export function SnackbarProvider({ children }) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("info");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const updateSnackbarMessage = (message, severityLevel) => {
     setSnackbarMessage(message);
     setSeverity(severityLevel);
-    setOpenSnackbar(true)
-  };
-
-  const clearSnackbarMessage = () => {
-    setTimeout(() => {
-      setSnackbarMessage("");
-      setSeverity("info");
-      setOpenSnackbar(false);
-    }, 500)
   };
 
   return (
-    <SnackbarContext.Provider value={{ updateSnackbarMessage, clearSnackbarMessage }}>
+    <SnackbarContext.Provider value={{ updateSnackbarMessage }}>
       {children}
-      <Snackbars 
-        open={openSnackbar}
+      <Snackbars
+        title={snackbarMessage}
         severity={severity}
         autoHideDuration={snackbarMessage == "Carregando"  ? 50000 : 6000}
-        title={snackbarMessage}
-        onClose={(event, reason) => {
-          if (reason === "clickaway") return;
-          setOpenSnackbar(false)
+        onExited={() => {
+          setSnackbarMessage("");
+          setSeverity("info");
         }}
-        onExited={clearSnackbarMessage}
       />
     </SnackbarContext.Provider>
   );
