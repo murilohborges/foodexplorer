@@ -5,6 +5,7 @@ import { USER_ROLE } from '../../utils/roles.js';
 import { useAuth } from "../../hooks/auth.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function Plate({ data, receivedOrderToCart, ...rest }){
   const PlateTitle = `${data.title} >`;
@@ -16,7 +17,7 @@ export function Plate({ data, receivedOrderToCart, ...rest }){
   const navigate = useNavigate();
   const avatarUrl = data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : plateIcon;
   const [numberOrders, setNumberOrders] = useState(Number('1'));
-  
+  const { updateSnackbarMessage } = useSnackbar();
 
   function handleDetails(id){
     id = PlateId;
@@ -41,37 +42,34 @@ export function Plate({ data, receivedOrderToCart, ...rest }){
   }
 
   async function handleAddToCart(id, amount){
-    const confirm = window.confirm("Você quer mesmo adicionar o prato e essa quantidade no carrinho?")
-    if(confirm){
-      id = Number(PlateId);
-      amount = numberOrders;
-      const response = await api.get(`plates/${id}`);
-      if(amount == 0){
-        return alert("Não é possível incluir um número zero de prato no carrinho")
-      }
-      const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
-      const numberElementsCart = cart == null ? 0 : cart.length;
-      let order = {
-        order_id: numberElementsCart + 1,
-        plate_id: id,
-        plate_amount: amount,
-        plate_title: response.data[0].title,
-        plate_avatar: response.data[0].avatar,
-        user_id: user.id
-      }
-      console.log(order)
-      receivedOrderToCart(order);
-      location.reload()
+    id = Number(PlateId);
+    amount = numberOrders;
+    const response = await api.get(`plates/${id}`);
+    if(amount == 0){
+      return alert("Não é possível incluir um número zero de prato no carrinho")
     }
+    const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
+    const numberElementsCart = cart == null ? 0 : cart.length;
+    let order = {
+      order_id: numberElementsCart + 1,
+      plate_id: id,
+      plate_amount: amount,
+      plate_title: response.data[0].title,
+      plate_avatar: response.data[0].avatar,
+      user_id: user.id
+    }
+    console.log(order)
+    receivedOrderToCart(order);
+    updateSnackbarMessage("Prato adicionado no carrinho com sucesso!", "success");
   }
 
   async function handleFavPlate() {
     try{
       const response = await api.post(`/favourites/${data.id}`);
-      alert("Prato favoritado com sucesso!");
+      updateSnackbarMessage("Prato favoritado com sucesso!", "success");
       navigate('/')
     }catch(e){
-      alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
+      updateSnackbarMessage("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.", "error");
     }
   }
 
