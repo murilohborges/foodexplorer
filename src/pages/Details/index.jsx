@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth.jsx";
 import { api } from "../../services/api.js";
 import { USER_ROLE } from '../../utils/roles.js'
-
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 import plateIcon from '../../assets/plateIcon.png'
 
 export function Details() {
@@ -22,7 +22,7 @@ export function Details() {
   const avatarUrl = avatar ? `${api.defaults.baseURL}/files/${avatar}` : plateIcon;
   const { user } = useAuth();
   const [numberOrders, setNumberOrders] = useState(Number('1'));
-
+  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -73,10 +73,10 @@ export function Details() {
   async function handleFavPlate() {
     try{
       const response = await api.post(`/favourites/${params.id}`);
-      alert("Prato favoritado com sucesso!");
+      updateSnackbarMessage("Prato favoritado com sucesso!", "success");
       navigate('/')
     }catch(e){
-      alert("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.");
+      updateSnackbarMessage("Não foi possível realizar esta ação, verifique se o prato já não foi favoritado pelo usuário.", "error");
     }
   }
 
@@ -87,7 +87,7 @@ export function Details() {
       let amount = numberOrders;
       const response = await api.get(`plates/${params.id}`);
       if(amount == 0){
-        return alert("Não é possível incluir um número zero de prato no carrinho")
+        return updateSnackbarMessage("Não é possível incluir um número zero de prato no carrinho", "error")
       }
       const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
       const numberElementsCart = cart == null ? 0 : cart.length;
@@ -109,6 +109,7 @@ export function Details() {
       cartUser.push(order);
       localStorage.setItem(`@foodexplorer:cartuser${user.id}`, JSON.stringify(cartUser));
     }
+    updateSnackbarMessage("Prato adicionado no carrinho com sucesso!", "success");
   }
 
   return(
