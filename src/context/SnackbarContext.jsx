@@ -1,23 +1,40 @@
 import { createContext, useState, useContext } from "react";
+import { Snackbars } from '../components/Snackbar';
 
 const SnackbarContext = createContext();
 
 export function SnackbarProvider({ children }) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [severity, setSeverity] = useState("");
+  const [severity, setSeverity] = useState("info");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const updateSnackbarMessage = (message, severity) => {
+  const updateSnackbarMessage = (message, severityLevel) => {
     setSnackbarMessage(message);
-    setSeverity(severity);
+    setSeverity(severityLevel);
+    setOpenSnackbar(true)
   };
 
   const clearSnackbarMessage = () => {
-    setSnackbarMessage("");
+    setTimeout(() => {
+      setSnackbarMessage("");
+      setSeverity("info");
+      setOpenSnackbar(false);
+    }, 500)
   };
 
   return (
-    <SnackbarContext.Provider value={{ snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage }}>
+    <SnackbarContext.Provider value={{ updateSnackbarMessage, clearSnackbarMessage }}>
       {children}
+      <Snackbars 
+        open={openSnackbar}
+        severity={severity} 
+        title={snackbarMessage}
+        onClose={(event, reason) => {
+          if (reason === "clickaway") return;
+          setOpenSnackbar(false)
+        }}
+        onExited={clearSnackbarMessage}
+      />
     </SnackbarContext.Provider>
   );
 }
