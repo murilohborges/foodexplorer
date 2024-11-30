@@ -114,15 +114,6 @@ export function New() {
     setMenuIsOpen(false);
   }
 
-  useEffect(() => {
-    console.log("Snackbar foi atualizado ou acionado.");
-  }, [updateSnackbarMessage]);
-
-  useEffect(() => {
-    console.log("Título atualizado:", title);
-  }, [title]);
-  
-
   return(
     <Container $menuIsOpen={menuIsOpen}>
       <SideMenu
