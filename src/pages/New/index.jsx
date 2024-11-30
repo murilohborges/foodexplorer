@@ -1,17 +1,15 @@
 import { Container, BackButton, Main, Form, Avatar, SaveButton, Row, FixedContent } from "./styles.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Textarea } from "../../components/Textarea/index.jsx";
 import { NoteItem } from "../../components/NoteItem/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
-import { Link } from "react-router-dom";
 import plateIcon from '../../assets/plateIcon.png';
-
 import { useAuth } from '../../hooks/auth';
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 import { api } from '../../services/api.js'
-
 
 export function New() {
   const { user } = useAuth();
@@ -20,19 +18,16 @@ export function New() {
   const [category, setCategory] = useState("Refeição");
   const [price, setPrice] = useState("00,00");
   const [description, setDescription] = useState("");
-
-  const avatarUrl = plateIcon;
-
-  const [avatar, setAvatar] = useState(avatarUrl);
-  const [avatarFile, setAvatarFile] = useState(null);
-
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const avatarUrl = plateIcon;
+  const [avatar, setAvatar] = useState(avatarUrl);
+  const [avatarFile, setAvatarFile] = useState(null);
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const navigate = useNavigate();
-  var nameFile = '';
+  const { updateSnackbarMessage } = useSnackbar();
 
   function handleBack(){
     navigate(-1)
@@ -49,19 +44,23 @@ export function New() {
 
   async function handleNewPlate(){
     if (!title) {
-      return alert("Digite o título do prato");
+      return updateSnackbarMessage("Digite o título do prato", "warning");
     }
 
-    if (!price) {
-      return alert("Digite o preço do prato");
+    if (price == "00,00") {
+      return updateSnackbarMessage("Digite o preço do prato", "warning");
     }
 
     if (!description) {
-      return alert("Digite a descrição do prato");
+      return updateSnackbarMessage("Digite a descrição do prato", "warning");
+    }
+
+    if (ingredients.length == 0) {
+      return updateSnackbarMessage("Você deve adicionar pelo menos um ingrediente", "warning")
     }
 
     if (newIngredient) {
-      return alert("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
+      return updateSnackbarMessage("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio", "warning")
     }
 
     const response = await api.post("/plates", {
@@ -83,16 +82,15 @@ export function New() {
       }
     }catch(error) {
       if(error.response) {
-        alert(error.response.data.message);
+        updateSnackbarMessage(error.response.data.message, "error");
       }else{
-        alert("Não foi possível atualizar.")
+        updateSnackbarMessage("Não foi possível criar o prato.", "error")
       }
     }
     
+    updateSnackbarMessage("Prato criado com sucesso!", "success");
     
-
-    alert("Prato criado com sucesso");
-    navigate(-1);
+    navigate("/");
   }
 
   async function handleChangeAvatar(event){
@@ -116,9 +114,17 @@ export function New() {
     setMenuIsOpen(false);
   }
 
+  useEffect(() => {
+    console.log("Snackbar foi atualizado ou acionado.");
+  }, [updateSnackbarMessage]);
+
+  useEffect(() => {
+    console.log("Título atualizado:", title);
+  }, [title]);
+  
+
   return(
     <Container $menuIsOpen={menuIsOpen}>
-
       <SideMenu
         menuIsOpen={menuIsOpen}
         onCloseMenu={onCloseMenu}
