@@ -1,6 +1,14 @@
 import { Snackbar, Alert } from "@mui/material";
+import { memo } from "react";
 
-export function Snackbars({ title, severity, autoHideDuration = 6000, onClose, ...rest }) {
+export const Snackbars = memo(function Snackbars({
+  open,
+  title, 
+  severity, 
+  autoHideDuration = 6000, 
+  onClose, 
+  ...rest 
+}) {
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
@@ -9,6 +17,7 @@ export function Snackbars({ title, severity, autoHideDuration = 6000, onClose, .
 
   return(
     <Snackbar
+      open={open}
       autoHideDuration={autoHideDuration}
       onClose={handleClose}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -19,4 +28,4 @@ export function Snackbars({ title, severity, autoHideDuration = 6000, onClose, .
       </Alert>
     </Snackbar>
   )
-}
+});
