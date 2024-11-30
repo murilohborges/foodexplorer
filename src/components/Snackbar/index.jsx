@@ -1,18 +1,23 @@
 import { Snackbar, Alert } from "@mui/material";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 
 export const Snackbars = memo(function Snackbars({
-  open,
   title, 
   severity, 
-  autoHideDuration = 6000, 
-  onClose, 
+  autoHideDuration = 6000,
+  onExited,
   ...rest 
 }) {
 
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (title) setOpen(true);
+  }, [title]);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
-    if (onClose) onClose(event);
+    setOpen(false);
   };
 
   return(
@@ -20,6 +25,7 @@ export const Snackbars = memo(function Snackbars({
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={handleClose}
+      onExited={onExited}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       {...rest}
     >
