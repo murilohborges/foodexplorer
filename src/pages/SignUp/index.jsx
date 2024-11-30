@@ -12,10 +12,7 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
 
   function handleSignUp(){
     if(!name || !email || !password){
@@ -36,32 +33,12 @@ export function SignUp() {
     })
   }
 
-  useEffect(() => {
-    if (snackbarMessage) {
-      setOpenSnackbar(true);
-    } else if (loading) {
-      setOpenSnackbar(true);
-      updateSnackbarMessage("Carregando...", "info")
-    }
-  }, [snackbarMessage, loading]);
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-    clearSnackbarMessage();
-  };
-
   async function handleToLogin(){
     clearSnackbarMessage();
   }
 
   return(
     <Container>
-      <Snackbars 
-        open={openSnackbar}
-        severity={severity} 
-        title={snackbarMessage}
-        onClose={handleCloseSnackbar} 
-      />
 
       <HeaderLogo>
         <svg width="39" height="44" viewBox="0 0 39 44" fill="none" xmlns="http://www.w3.org/2000/svg">
