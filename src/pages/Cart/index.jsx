@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { api } from "../../services/api.js";
 import { CartPlate } from "../../components/CartPlate/index.jsx";
 import { useAuth } from "../../hooks/auth.jsx";
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function Cart() {
   const [varSearch, setVarSearch] = useState("");
@@ -14,6 +15,7 @@ export function Cart() {
   const [cartPlates, setCartPlates] = useState([]);
   const numbercart = cartPlates === null ? 0 : cartPlates.length;
   const { user } = useAuth();
+  const { updateSnackbarMessage } = useSnackbar();
 
   async function receivedSearch(search){
     setVarSearch(search);
@@ -29,17 +31,18 @@ export function Cart() {
 
   async function handleAdvanceToPayment(){
     if(cartPlates.length == 0){
-      return alert("O carrinho está vazio. Adicione pratos para avançar para o pagamento!")
+      return updateSnackbarMessage("O carrinho está vazio. Adicione pratos para avançar para o pagamento!", "warning")
     }
     let itemsUser = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
     const response = await api.post("/stripe/create-checkout-session", { itemsUser });
     if(response.status !== 200) {
-      return alert(error.response.data.message);
+      return updateSnackbarMessage(error.response.data.message, "error");
     }
     try{
+      updateSnackbarMessage("Carregando", "info")
       window.location = response.data.url
     }catch(error){
-      alert(error.response.data.message);
+      updateSnackbarMessage(error.response.data.message, "error");
     }
   }
 
