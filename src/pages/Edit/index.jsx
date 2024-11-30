@@ -10,6 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/api.js";
 import { PanelButton } from "../../components/PanelButton/index.jsx";
 import { Button } from "../../components/Button/index.jsx";
+import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
 export function Edit() {
   const avatarUrl = plateIcon;
@@ -26,7 +27,7 @@ export function Edit() {
   const [newIngredient, setNewIngredient] = useState("");
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-
+  const { updateSnackbarMessage } = useSnackbar();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -45,19 +46,23 @@ export function Edit() {
 
   async function handleEditPlate(){
     if (!title) {
-      return alert("Digite o título do prato");
+      return updateSnackbarMessage("Digite o título do prato", "warning");
     }
 
-    if (!price) {
-      return alert("Digite o preço do prato");
+    if (price == "00,00") {
+      return updateSnackbarMessage("Digite o preço do prato", "warning");
     }
 
     if (!description) {
-      return alert("Digite a descrição do prato");
+      return updateSnackbarMessage("Digite a descrição do prato", "warning");
+    }
+
+    if (ingredients.length == 0) {
+      return updateSnackbarMessage("Você deve adicionar pelo menos um ingrediente", "warning")
     }
 
     if (newIngredient) {
-      return alert("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
+      return updateSnackbarMessage("Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio", "warning")
     }
 
     const response = await api.put(`/plates/${params.id}`, {
@@ -72,20 +77,17 @@ export function Edit() {
       if(avatarFile) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("avatar", avatarFile);
-
-        
-  
         const response = await api.patch(`/plates/avatar/${params.id}`, fileUploadForm);
       }
     }catch(error) {
       if(error.response) {
-        alert(error.response.data.message);
+        updateSnackbarMessage(error.response.data.message, "error");
       }else{
-        alert("Não foi possível atualizar.")
+        alert("Não foi possível atualizar.", "error")
       }
     }
     
-    alert("Prato editado com sucesso");
+    updateSnackbarMessage("Prato editado com sucesso", "success");
     navigate("/");
   }
 
