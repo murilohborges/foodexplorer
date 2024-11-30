@@ -22,7 +22,7 @@ export function Details() {
   const avatarUrl = avatar ? `${api.defaults.baseURL}/files/${avatar}` : plateIcon;
   const { user } = useAuth();
   const [numberOrders, setNumberOrders] = useState(Number('1'));
-  const { updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
+  const { updateSnackbarMessage } = useSnackbar();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -81,24 +81,21 @@ export function Details() {
   }
 
   async function handleAddToCart(){
-    const confirm = window.confirm("Você quer mesmo adicionar o prato e essa quantidade no carrinho?")
-    if(confirm){
-      let id = Number(params.id);
-      let amount = numberOrders;
-      const response = await api.get(`plates/${params.id}`);
-      if(amount == 0){
-        return updateSnackbarMessage("Não é possível incluir um número zero de prato no carrinho", "error")
-      }
-      const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
-      const numberElementsCart = cart == null ? 0 : cart.length;
-      var order = {
-        order_id: numberElementsCart + 1,
-        plate_id: id,
-        plate_amount: amount,
-        plate_title: response.data[0].title,
-        plate_avatar: response.data[0].avatar,
-        user_id: user.id
-      }
+    let id = Number(params.id);
+    let amount = numberOrders;
+    const response = await api.get(`plates/${params.id}`);
+    if(amount == 0){
+      return updateSnackbarMessage("Não é possível incluir um número zero de prato no carrinho", "error")
+    }
+    const cart = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`))
+    const numberElementsCart = cart == null ? 0 : cart.length;
+    var order = {
+      order_id: numberElementsCart + 1,
+      plate_id: id,
+      plate_amount: amount,
+      plate_title: response.data[0].title,
+      plate_avatar: response.data[0].avatar,
+      user_id: user.id
     }
     const cartVerify = JSON.parse(localStorage.getItem(`@foodexplorer:cartuser${user.id}`));
     if(cartVerify === null){
