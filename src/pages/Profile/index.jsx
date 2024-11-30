@@ -1,11 +1,10 @@
 import { Container, BackButton, Main, Form, SaveButton, Row, FixedContent } from "./styles.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Header } from "../../components/Header/index.jsx";
 import { Footer } from "../../components/Footer/index.jsx";
 import { Input } from "../../components/Input/index.jsx";
 import { SideMenu } from "../../components/SideMenu/index.jsx";
-import { Snackbars } from "../../components/Snackbar";
 import { api } from '../../services/api.js';
 import { useSnackbar } from '../../context/SnackbarContext.jsx';
 
@@ -15,10 +14,8 @@ export function Profile() {
   const [newEmail, setNewEmail] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const { snackbarMessage, severity, updateSnackbarMessage, clearSnackbarMessage } = useSnackbar();
+  const { updateSnackbarMessage } = useSnackbar();
 
   const navigate = useNavigate();
   function handleBack(){
@@ -58,29 +55,8 @@ export function Profile() {
     setMenuIsOpen(false);
   }
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-    clearSnackbarMessage();
-  };
-
-  useEffect(() => {
-    if (snackbarMessage) {
-      setOpenSnackbar(true);
-    } else if (loading) {
-      setOpenSnackbar(true);
-      updateSnackbarMessage("Carregando...", "info");
-    }
-  }, [snackbarMessage, loading]);
-
   return(
     <Container $menuIsOpen={menuIsOpen}>
-      <Snackbars
-        open={openSnackbar}
-        severity={severity} 
-        title={snackbarMessage}
-        onClose={handleCloseSnackbar} 
-      />
-
       <SideMenu
         menuIsOpen={menuIsOpen}
         onCloseMenu={onCloseMenu}
