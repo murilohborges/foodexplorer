@@ -19,10 +19,6 @@ export function SnackbarProvider({ children }) {
         title={snackbarMessage}
         severity={severity}
         autoHideDuration={snackbarMessage == "Carregando"  ? 50000 : 6000}
-        onExited={() => {
-          setSnackbarMessage("");
-          setSeverity("info");
-        }}
       />
     </SnackbarContext.Provider>
   );
