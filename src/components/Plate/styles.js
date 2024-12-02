@@ -103,10 +103,12 @@ export const EditIcon = styled.div`
 `;
 
 export const FavIcon = styled.div`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
+  > .empty, .filled {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer; 
+  }
 `;
 
 export const DetailsButton = styled.div`
