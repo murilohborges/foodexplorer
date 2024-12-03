@@ -84,11 +84,11 @@ export function Plate({ data, receivedOrderToCart, ...rest }){
     async function fetchPlates(){
       const response = await api.get(`/favourites?title=`);
       const dataPlate = response.data;
-      if(dataPlate.length != 0 && dataPlate[0].plate_id == PlateId){
-        setIsFavourited(true)
-      } else {
-        setIsFavourited(false)
-      }
+      dataPlate.forEach((plate) => {
+        if(plate.id == PlateId){
+          setIsFavourited(true)
+        }
+      });
       
     }
     fetchPlates();
